@@ -1,0 +1,273 @@
+/* reload */
+/* sass -w sass/styles.scss css/styles.css */
+@font-face {
+  font-family: Apple;
+  src: url(../fonts/SFProDisplay-Ultralight.woff);
+}
+@font-face {
+  font-family: Apple-mono;
+  src: url(../fonts/sf-mono-regular.otf);
+}
+#slider {
+  margin-top: 45px;
+}
+
+#products {
+  margin-top: 10px;
+}
+
+.product {
+  border: 2px solid black;
+  border-radius: 10px;
+  display: inline-block;
+  cursor: pointer;
+}
+.product .image {
+  width: 180px;
+  height: 180px;
+}
+.product .name {
+  font-size: 15px;
+}
+.product .price > div {
+  padding: 0px 10px;
+}
+
+#slider {
+  box-sizing: border-box;
+}
+
+.slideshow-container {
+  position: relative;
+  max-width: 1180px;
+  margin: auto;
+  /* Hide the images by default */
+  /* Caption text */
+  /* Number text (1/3 etc) */
+  /* Fading animation */
+}
+.slideshow-container .mySlides {
+  display: none;
+}
+.slideshow-container .text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+.slideshow-container .numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+.slideshow-container .fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+@keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.info {
+  display: block;
+  margin-top: 45px;
+  height: 36px;
+}
+.info .name {
+  position: absolute;
+  font-size: 30px;
+}
+.info div .price {
+  display: inline-block;
+  font-size: 30px;
+}
+
+.product-image {
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 300px;
+  height: 300px;
+}
+
+#shops {
+  display: inline-block;
+  height: 300px;
+  text-align: left;
+  width: 65%;
+  padding-top: 10px;
+}
+#shops .shop {
+  display: block;
+  cursor: pointer;
+  height: 30px;
+}
+#shops .shop .name {
+  float: left;
+}
+#shops .shop .price {
+  float: right;
+}
+#shops .shop .price div {
+  font-family: Apple-mono;
+  font-weight: 100;
+  display: inline-block;
+  padding-left: 10px;
+}
+
+#changePrice {
+  margin-top: 10px;
+  text-align: center;
+  width: 100%;
+}
+#changePrice div {
+  border: 2px solid black;
+  border-radius: 10px;
+  display: inline-block;
+  padding: 5px;
+  width: 200px;
+}
+#changePrice #rub {
+  background-color: wheat;
+}
+
+.chart #rub-chart {
+  z-index: 1;
+  position: absolute;
+  background-color: white;
+}
+.chart #dol-chart {
+  background-color: white;
+}
+
+#product-description {
+  margin-bottom: 20px;
+  text-align: left;
+  font-size: 18px;
+}
+
+/* Reviews */
+.review {
+  text-align: left;
+  margin-bottom: 5px;
+}
+.review .description {
+  font-size: 15px;
+}
+
+.make-review {
+  padding-bottom: 100px;
+}
+.make-review #new-review {
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+  height: 75px;
+  max-height: 75px;
+  min-height: 75px;
+}
+.make-review #send {
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 100px;
+  margin-top: 5px;
+}
+
+#triangle {
+  width: 50px;
+}
+
+#wheel {
+  /* transform: rotate(45deg); */
+  margin-top: 5px;
+  margin-bottom: 10px;
+  width: 300px;
+}
+
+#get-fact {
+  border: 2px solid black;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 200px;
+  margin: 0 auto;
+}
+
+#fact {
+  margin-top: 30px;
+}
+
+* {
+  font-family: Apple;
+  font-weight: 600;
+  font-size: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+body {
+  margin-bottom: 10px;
+}
+
+.center {
+  max-width: 1180px;
+  min-height: 98vh;
+  border: 2px solid black;
+  border-radius: 10px;
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0px 15px;
+}
+
+.menu {
+  position: fixed;
+  display: flex;
+  margin-left: -15px;
+  cursor: pointer;
+  height: 45px;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1210px;
+  border-radius: 10px;
+  z-index: 999;
+}
+.menu .item {
+  display: inline-block;
+  padding: 10px;
+}
+.menu .item-right {
+  margin-left: auto;
+  order: 2;
+}
+
+.footer {
+  display: block;
+  position: absolute;
+  width: 100%;
+  margin-left: -15px;
+  bottom: 0px;
+  padding: 10px 0px;
+  background-color: rgb(255, 203, 135);
+  border-radius: 10px;
+}
+
+/*# sourceMappingURL=styles.css.map */

@@ -1,0 +1,24 @@
+$wheel-size: 300px;
+
+#triangle {
+    width: 50px;
+}
+
+#wheel {
+    /* transform: rotate(45deg); */
+    margin-top: 5px;
+    margin-bottom: 10px;
+    width: $wheel-size;
+}
+
+#get-fact {
+    @include border;
+
+    cursor: pointer;
+    width: 200px;
+    margin: 0 auto;
+}
+
+#fact {
+    margin-top: 30px;
+}

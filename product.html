@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Save Money</title>
+  <link rel="icon" type="image/x-icon" href="img/favicon.png"/>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="center">
+        <div class="menu">
+            <div class="item left" onclick="location.href='./index.html'">Главная</div>
+            <div class="item left">Новости</div>
+            <div class="item left">Товары(Add/Edit/Delete)</div>
+            <div class="item left">Администрирование</div>
+            <div class="item left" onclick="location.href='./about.html'">О нас</div>
+            
+            <div class="item-right">
+              <div class="item ">Профиль</div>
+              <div class="item ">Войти</div>
+          </div>
+        </div>
+        <div class="info">
+            <div class="name left" id="name">Электрочайник Hi EK-17C23</div>
+
+            <div class="right">
+              <div class="price" id="price-rub">2799  ₽</div>
+              <div class="price" id="price-dol">29.0 $</div>
+            </div>
+        </div>
+
+
+        
+        <img class="product-image left" src="img/product.jpg"/>
+        
+
+        <div id="shops">
+          <!-- <div class="shop" onclick="window.open('http://google.com','EE');">
+            <div class="name">Ситилинк</div>
+            <div class="price">
+              <div id="price-rub">2799 ₽</div>
+              <div id="price-dol">29.0 $</div>
+            </div>
+          </div>-->
+          
+          
+          <!-- <div>М.Видео</div>
+          <div>Regard</div>
+          <div>Ya.Market</div>
+          <div>video-shoper</div>
+          <div>Positronika</div> -->
+        </div>
+
+        <div id="changePrice">
+            <div id="rub">Цены в рублях</div>
+            <div id="dol">Цены в долларах</div>
+        </div>
+        <div class="chart">
+          <canvas id="rub-chart"></canvas>
+          <canvas id="dol-chart"></canvas>
+        </div>
+
+        <div>Описание</div>
+        <div id="product-description">
+          <pre>Страна:   Китай
+Гарантия:  1 год
+Срок службы: 2 года
+Модель:  Hi EK-17C23
+Серия:   Hi EK-17C
+
+Обратите внимание:   Защита от включения без воды
+Удачное решение:   Дисплей с отображением температуры
+Важная особенность:  Двойные стенки
+Пользователи оценят:   Мощность 2000Вт, объём 1.7 л.
+Хорошо придумано:  Кипячение и подгорев воды
+Максимальный объем:  1.7 л
+Потребляемая мощность:   2000 Вт
+Длина сетевого шнура:  0.8 м
+Диапазон температур:   40-100 *С
+Материал корпуса:  нержавеющая сталь/ пластик</pre>
+        </div>
+
+        <div >Отзывы</div>
+
+        <div class="reviews" id="reviews">
+          <!-- <div class="review">
+            <div class="name">
+              Bob
+            </div>
+            <div class="description">
+              Бесплатный онлайн перевод с английского и других языков на русский и обратно. Переводчик работает со словами, текстами, а также веб-страницами и надписями ..
+            </div>
+          </div> -->
+        </div>
+      
+        <div class="make-review">
+          <div>Оставить отзыв</div>
+          <textarea id="new-review"></textarea>
+          <div id="send">Отправить</div>
+        </div>
+        
+
+        <div class="footer">© SaveЧеканнаяМонета.ru ©</div>
+    </div>
+
+
+    
+</body>
+
+<footer>
+  <script type="text/javascript" src="js/libs/chart.js"></script>
+  <script type="module" src="js/modules/currencyConverter.js"></script>
+  <script type="module" src="js/modules/shopList.js"></script>
+  <script type="module" src="js/modules/drawChart.js"></script>
+  <script type="module" src="js/modules/reviews.js"></script>
+  <script type="module" src="js/product.js"></script>
+</footer>
+
+
+</html>
+</html>
