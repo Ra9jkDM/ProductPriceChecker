@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="info">О нас</div>
+        
+<img id="triangle" src="{% static 'img/triangle.png' %}"/><br>
+<img id="wheel" src="{% static 'img/wheel.png' %}"/>
+             
+<div id="get-fact" onclick="getFact()">Узнать факты о компании!</div>
+<div id="fact">
+
+</div>
+{% endblock content %}
+
+        
+{% block footer %}
+  <script type="text/javascript" src="{% static 'js/about.js' %}"></script>
+{% endblock footer%}
+

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div id="slider">
+        <div class="slideshow-container">
+
+            <!-- Full-width images with number and caption text -->
+            <div class="mySlides fade">
+            <div class="numbertext">1 / 4</div>
+            <img src="{% static 'img/slide_1.jpg' %}" style="width:100%">
+            <!-- <div class="text">Caption Text</div> -->
+            </div>
+        
+            <div class="mySlides fade">
+            <div class="numbertext">2 / 4</div>
+            <img src="{% static 'img/slide_2.jpg' %}" style="width:100%">
+            <!-- <div class="text">Caption Two</div> -->
+            </div>
+        
+            <div class="mySlides fade">
+            <div class="numbertext">3 / 4</div>
+            <img src="{% static 'img/slide_3.jpg' %}" style="width:100%">
+            <!-- <div class="text">Caption Three</div> -->
+            </div>
+        
+        </div>
+        <br>
+        
+    </div>
+
+    <div id="products">
+        {% for n in 'test_str_for_loop' %}
+        <div class="product" onclick="location.href='/product'"> <!--window.open('./product.html','Product');-->
+            <img class="image" src="{% static 'img/product.jpg' %}"/>
+            <div class="name">Электрочайник Hi EK-17C23</div>
+            <div class="price">
+                <div id="price-rub" class="left">3000 ₽</div>
+                <div id="price-dol" class="right">35.0 $</div>
+            </div>
+        </div>
+        {% endfor %}
+        
+    </div>
+{% endblock content %}
+
+
+{% block footer %}
+    <script type="text/javascript" src="{% static 'js/modules/slider.js' %}"></script>
+{% endblock footer %}
