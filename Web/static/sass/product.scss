@@ -2,6 +2,8 @@ $image-size: 300px;
 $description-font-size: 18px;
 $review-font-size: 15px;
 
+$footer-padding: 100px;
+
 .info {
     display: block;
     margin-top: $menu-height;
@@ -110,7 +112,7 @@ $review-font-size: 15px;
 }
 
 .make-review {
-    padding-bottom: 100px;
+    padding-bottom: $footer-padding;
 
     #new-review {
         $percent: 100%;

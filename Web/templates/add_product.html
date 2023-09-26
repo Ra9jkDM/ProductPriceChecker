@@ -1,0 +1,78 @@
+{% extends "base.html"%}
+{% load static %}
+
+{% block content %}
+    <div class="info">
+    </div>
+
+    <table>
+      <tr>
+        <td class="left-width">
+          <div class="inline-container">
+            <img id="img" class="product-image" src="{% static 'img/product.jpg' %}"/>
+            <div class="button">Загрузить изображение</div>
+        </div>
+        </td>
+
+        <td>
+          <div>
+            <div id="name">Название товара:</div>
+            <input type="text"/>
+            <div id="description">Описание товара:</div>
+            <textarea rows="9"></textarea>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+   
+
+    <table id="shops-table">
+      {% for i in "rtyegs" %}
+      <tr>
+        <td>Citilink</td>
+        <td class="url">
+          <input id="dns" type="text"/>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <div id="test" class="button">Проверить данные</div>
+
+    <table id="shops-table" class="report">
+      {% for i in "rtyegs" %}
+      <tr>
+        <td>Citilink</td>
+        <td class="name">
+          Электрочайник Hi EK-17C23
+        </td>
+        <td class="price">
+          100 ₽
+        </td>
+        <td class="price">
+          100 $
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <div id="save" class="button disabled-button">Сохранить изменения</div>
+
+    
+  
+
+{% endblock content %}        
+
+
+{% block footer %}
+  <!-- <script type="text/javascript" src="{% static 'js/libs/chart.js' %}"></script>
+  <script type="module" src="{% static 'js/modules/currencyConverter.js' %}"></script>
+  <script type="module" src="{% static 'js/modules/shopList.js' %}"></script>
+  <script type="module" src="{% static 'js/modules/drawChart.js' %}"></script>
+  <script type="module" src="{% static 'js/modules/reviews.js' %}"></script>
+
+  <script type="module" src="{% static 'js/product.js' %}"></script> -->
+{% endblock footer %}
+
+

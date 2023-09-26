@@ -76,6 +76,7 @@ WSGI_APPLICATION = 'PriceWatcher.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+# python manage.py migrate
 
 DATABASES = {
     'default': {
