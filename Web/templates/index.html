@@ -28,23 +28,35 @@
         <br>
         
     </div>
+    
+
+    <select id="sort">
+        <option value="nameASC">от А до Я</option>
+        <option value="nameDESC">от Я до А</option>
+        <option value="priceASC">по возрастанию цены</option>
+        <option value="priceDESC">по убыванию цены</option>
+    </select>
 
     <div id="products">
-        {% for n in 'test_str_for_loop' %}
-        <div class="product" onclick="location.href='/product'"> <!--window.open('./product.html','Product');-->
+        <!--window.open('./product.html','Product');-->
+        <!-- {% for n in 'test_str_for_loop' %}
+        <div class="product" onclick="location.href='/product'"> 
             <img class="image" src="{% static 'img/product.jpg' %}"/>
             <div class="name">Электрочайник Hi EK-17C23</div>
             <div class="price">
-                <div id="price-rub" class="left">3000 ₽</div>
-                <div id="price-dol" class="right">35.0 $</div>
+                <div class="price-rub left">3000 ₽</div>
+                <div class="price-dol right">35.0 $</div>
             </div>
         </div>
-        {% endfor %}
+        {% endfor %} -->
         
     </div>
+    
 {% endblock content %}
 
 
 {% block footer %}
     <script type="text/javascript" src="{% static 'js/modules/slider.js' %}"></script>
+    <script type="module" src="{% static 'js/modules/currencyConverter.js' %}"></script>
+    <script type="module" src="{% static 'js/index.js' %}"></script>
 {% endblock footer %}

@@ -123,7 +123,7 @@ class ExchangeRates(Base):
 
 
 
-conn = ENGINE.connect() 
+# conn = ENGINE.connect() 
 
 
 def add_test_data():
@@ -131,6 +131,8 @@ def add_test_data():
                 "Водоочиститель Аквафор Кристалл", "Кулер AEL LD-AEL-28c, напольный, электронный",
                  "Кондиционер Сплит-система CENTEK CT-65E12 настенная", "Швейная машина Janome Excellent Stitch 100",
                   "Сушилка для рук G-TEQ 8860 PS"]
+
+    images = ["1.jpg", "2.jpg", "3.jpg", "4.jpg"]
     shops = ["Citilink", "Positronica", "Video-shoper", "Regard"]
 
     roles = ["Admin", "User"]
@@ -153,7 +155,7 @@ def add_test_data():
 
 
         for i, name in enumerate(products):
-            db.add(Product(id=i, name=name))
+            db.add(Product(id=i, name=name, image=random.choice(images)))
             for j in range(random.randint(1, 8)):
                 db.add(Comment(product_id=i, user_id=random.randint(1, len(users)), comment=random.choice(comments), stars=random.randint(0, 5)))
 
@@ -185,7 +187,7 @@ def selection_of_db():
         print('Товары:')
         products = db.query(Product).all()
         for i in products:
-            print(i.name)
+            print(i.name, i.image)
             for j in i.urls:
                 price = sorted(j.prices, key=lambda price: price.date, reverse=True)
                 print(f'\t{j.shop.name} {j.url}\t{price[0].price}')
@@ -216,3 +218,5 @@ if __name__ == "__main__":
 
     # add_test_data()
     selection_of_db()
+
+# python Web/models.py

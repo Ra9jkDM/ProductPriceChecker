@@ -1,5 +1,6 @@
 $image-size: 180px;
 $name-font-size: 15px;
+$name-height: 36px;
 
 #slider {
     margin-top: $menu-height;
@@ -16,13 +17,21 @@ $name-font-size: 15px;
     display: inline-block;
     cursor: pointer;
 
+    width: 200px;
+    margin: 5px;
+
     .image {
-        width: $image-size;
         height: $image-size;
+        width: auto;
+        max-width: $image-size;
     }
 
     .name {
         font-size: $name-font-size;
+        width: $image-size;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: $name-height;
     }
 
     .price > div {

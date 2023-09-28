@@ -11,9 +11,9 @@ function sortByASC(input){
     return input.sort(function(a, b) {
         let len = a.data.length - 1;
         if (a.data[len] > b.data[len]) {
-            return 1
+            return 1;
         } else if (a.data[len] < b.data[len]) {
-            return -1
+            return -1;
         }
         return 0;
     });
