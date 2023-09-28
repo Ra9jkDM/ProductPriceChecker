@@ -3,7 +3,7 @@
 
 {% block content %}
     <div class="info">
-        <div class="name left" id="name">Электрочайник Hi EK-17C23</div>
+        <div class="name left" id="name">{{ id }}</div>
 
         <div class="right">
             <div class="price" id="price-rub">2799  ₽</div>
@@ -13,7 +13,7 @@
 
 
         
-    <img class="product-image left" src="{% static 'img/product.jpg' %}"/>
+    <img id="img" class="product-image left"/>
         
 
     <div id="shops">
@@ -43,7 +43,7 @@
     </div>
     <div>Описание</div>
     <div id="product-description">
-      <pre>Страна:   Китай
+      <!-- <pre>Страна:   Китай
 Гарантия:  1 год
 Срок службы: 2 года
 Модель:  Hi EK-17C23
@@ -58,8 +58,8 @@
 Потребляемая мощность:   2000 Вт
 Длина сетевого шнура:  0.8 м
 Диапазон температур:   40-100 *С
-Материал корпуса:  нержавеющая сталь/ пластик</pre>
-    </div>
+Материал корпуса:  нержавеющая сталь/ пластик</pre>-->
+    </div> 
     <div >Отзывы</div>
     <div class="reviews" id="reviews">
           <!-- <div class="review">
@@ -86,8 +86,9 @@
   <script type="module" src="{% static 'js/modules/shopList.js' %}"></script>
   <script type="module" src="{% static 'js/modules/drawChart.js' %}"></script>
   <script type="module" src="{% static 'js/modules/reviews.js' %}"></script>
+  <script type="module" src="{% static 'js/modules/load_json.js' %}"></script>
 
-  <script type="module" src="{% static 'js/product.js' %}"></script>
+  <script type="module" src="{% static 'js/product.js' %}" defer></script>
 {% endblock footer %}
 
 

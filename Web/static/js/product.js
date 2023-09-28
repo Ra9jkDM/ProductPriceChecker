@@ -2,6 +2,7 @@ import { drawChart } from "./modules/drawChart.js";
 import {getRubPrice, getDolPriceNumber, getDolPrice} from "./modules/currencyConverter.js";
 import { createShopList } from "./modules/shopList.js";
 import { createReviews, appendReview } from "./modules/reviews.js";
+import {getJSON} from "./modules/load_json.js"
 
 
 const active_color = 'wheat';
@@ -26,12 +27,15 @@ function setMainPrice(input, len) {
     let price = input.datasets[0].data[len];
     
     rub.textContent=getRubPrice(price);
-    dol.textContent=getDolPrice(price, input.dollar[data_len]);
+    dol.textContent=getDolPrice(price, input.dollar[len]);
 }
 
 function setName(name) {
     const product_name = document.getElementById("name");
     product_name.textContent = name;
+}
+function getName() {
+    return document.getElementById("name").innerText;
 }
 
 function convertToDollarPrice(prices) {
@@ -70,48 +74,7 @@ function _change(num){
 }
 
 
-
-let input = {
-    name: "Электрочайник Hi EK-17C23",
-    labels: ["12.09.2023", "13.09.2023", "14.09.2023", "15.09.2023"],
-    urls: ['https://www.mvideo.ru/products/elektrochainik-hi-ek-17c23-400102164', 'http://google.com', 'http://google.com', 'http://google.com'],
-    dollar: [96.5, 80, 100, 100],
-    datasets: [{
-        label: 'М.Видео',
-        data: [2799, 3000, 2999, 2799],
-        borderWidth: 1
-      },
-	{
-        label: 'Citilink',
-        data: [3020, 3500, 3200, 3400],
-        borderWidth: 1
-      },
-      {
-        label: 'Regard',
-        data: [2500, 2800, 3000, 2899],
-        borderWidth: 1
-      },
-      {
-        label: 'video-shoper',
-        data: [2515, 2700, 2998, 3050],
-        borderWidth: 1
-      }],
-      reviews: [{
-        name: "Bob",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque finibus hendrerit purus a dictum. Morbi quis ipsum aliquet, elementum lectus ut, venenatis nisl."
-      },
-      {
-        name: "Alice",
-        description: "Integer vel lectus et magna aliquet euismod. Nunc facilisis dui ut purus auctor"
-      },
-      {
-        name: "Eve",
-        description: "Объекты могут быть отсортированы по значению одного из своих свойств."
-      }
-    ]
-}
-
-function _getDollarPrice() {
+function _getDollarPrice(input) {
     let dollar_price = structuredClone(input);
     return convertToDollarPrice(dollar_price);
 }
@@ -127,19 +90,39 @@ function createListeners() {
     review.addEventListener('click', appendReview);
 }
 
-input.datasets = sortByASC(input.datasets);
-const data_len = input.datasets[0].data.length - 1;
+function setDescription(desc) {
+    document.getElementById("product-description").innerHTML="<pre>" + desc + "</pre>";
+}
 
-let dollar_price = _getDollarPrice();
+function setImage(img) {
+    document.getElementById("img").src = img;
+}
 
-drawChart(input, 'rub-chart');
-drawChart(dollar_price, 'dol-chart');
 
-setName(input.name);
-setMainPrice(input, data_len);
-createShopList(input, data_len);
-createReviews(input.reviews);
+let id = getName();
 
-createListeners();
+let json = getJSON("/api/product?id="+ id);
+
+json.then(function(input) {
+    input.datasets = sortByASC(input.datasets);
+    const data_len = input.datasets[0].data.length - 1;
+
+    let dollar_price = _getDollarPrice(input);
+
+    drawChart(input, 'rub-chart');
+    drawChart(dollar_price, 'dol-chart');
+
+    setName(input.name);
+    setMainPrice(input, data_len);
+    setDescription(input.description);
+    setImage(input.image);
+
+    createShopList(input, data_len);
+
+    createReviews(input.reviews);
+
+    createListeners();
+
+})
 
 

@@ -13,12 +13,18 @@ $footer-padding: 100px;
     .name {
         position: absolute;
         font-size: $main-font-size;
+        max-width: 60%;
+
+        overflow: auto;
+        text-overflow: ellipsis;
+        height: 36px;
     }
 
     div {
         .price {
             display: inline-block;
             font-size: $main-font-size;
+            padding-left: 10px;
         }
     }
 }

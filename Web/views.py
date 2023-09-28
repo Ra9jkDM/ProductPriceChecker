@@ -5,7 +5,8 @@ def index(request):
     return render(request, 'index.html')
 
 def product(request):
-    return render(request, 'product.html')
+    id = request.GET.get("id")
+    return render(request, 'product.html', context={"id": id})
 
 def add_product(request):
     return render(request, 'add_product.html')

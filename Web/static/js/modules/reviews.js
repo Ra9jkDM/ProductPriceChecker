@@ -3,7 +3,6 @@ export function createReviews(reviews){
 
     for(let i=0; i < reviews.length; i++) {
         let review = _createReview(reviews[i].name, reviews[i].description);
-
         base.appendChild(review);
     }
 }

@@ -94,10 +94,15 @@
 .info .name {
   position: absolute;
   font-size: 30px;
+  max-width: 60%;
+  overflow: auto;
+  text-overflow: ellipsis;
+  height: 36px;
 }
 .info div .price {
   display: inline-block;
   font-size: 30px;
+  padding-left: 10px;
 }
 
 .product-image {

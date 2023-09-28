@@ -1,9 +1,6 @@
 import {getRubPrice, getDolPriceNumber, getDolPrice} from "./modules/currencyConverter.js";
+import {getJSON} from "./modules/load_json.js"
 
-async function getProducts(url) {
-    const response = await fetch(url);
-    return await response.json();
-}
 
 function createProductBlock(id, name, image, price_rub, price_dol) {
     const product = document.createElement("div");
@@ -134,7 +131,7 @@ function appendChildren(parent, children) {
 
 let products = document.getElementById("products");
 
-let json = getProducts("/api/get_products")
+let json = getJSON("/api/products")
 let json_data = "";
 products.innerHTML = "";
 
