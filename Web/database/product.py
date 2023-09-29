@@ -46,56 +46,80 @@ def get_products():
 
     return {"products": result, "currencies":currencies}
 
+
+
+
+def _fill_urls_prices_labels(product):
+    urls = []
+
+    isFilled = False
+    labels = []
+
+    datasets = []
+
+    for i in product.urls:
+        urls.append({"name": i.shop.name, "url": i.url, "price": i.prices[-1].price})
+
+        price = []
+        for j in i.prices:
+            price.append(j.price)
+
+            if not isFilled:
+                labels.append(str(j.date))
+
+        isFilled = True
+
+        datasets.append({"label": i.shop.name, "data":price, "borderWidth": 1})
+    
+    return urls, labels, datasets
+
+def _fill_dollar_price(db, start_day, currency_name):
+    dollar = []
+
+    first_date = datetime.strptime(start_day, "%Y-%m-%d") - timedelta(1)
+    currency_id = db.query(Currency).filter(Currency.name == currency_name).first().id
+    currency_price = db.query(ExchangeRates).filter(ExchangeRates.currency_id == currency_id,
+                                    ExchangeRates.date >= first_date).order_by(ExchangeRates.date.asc()).all()
+
+    for i in currency_price:
+        dollar.append(i.price)
+
+    return dollar
+
+def _fill_comments(product):
+    comments = []
+    for i in product.comments:
+        comments.append({"name": i.user.firstname, "lastname": i.user.lastname, "description": i.comment})
+    
+    return comments
+
+
+
 def get_product(id, currency_name = "Доллар"):
     result = {}
 
-    with Session(autoflush=True, bind=ENGINE) as db:
-        product = db.query(Product).filter(Product.id == id).first()
+    try:
+        with Session(autoflush=True, bind=ENGINE) as db:
+            product = db.query(Product).filter(Product.id == id).first()
 
-        urls = []
 
-        isFilled = False
-        labels = []
+            urls, labels, datasets = _fill_urls_prices_labels(product)
+            dollar = _fill_dollar_price(db, labels[0], currency_name)
+            comments = _fill_comments(product)
 
-        dollar = []
-        datasets = []
+            
 
-        for i in product.urls:
-            urls.append({"name": i.shop.name, "url": i.url, "price": i.prices[-1].price})
-
-            price = []
-            for j in i.prices:
-                price.append(j.price)
-
-                if not isFilled:
-                    labels.append(str(j.date))
-
-            isFilled = True
-
-            datasets.append({"label": i.shop.name, "data":price, "borderWidth": 1})
-
-        first_date = datetime.strptime(labels[0], "%Y-%m-%d") - timedelta(1)
-        currency_id = db.query(Currency).filter(Currency.name == currency_name).first().id
-        currency_price = db.query(ExchangeRates).filter(ExchangeRates.currency_id == currency_id,
-                                    ExchangeRates.date >= first_date).order_by(ExchangeRates.date.asc()).all()
-        # print(datetime.strptime(labels[0], "%Y-%m-%d"))
-
-        for i in currency_price:
-            dollar.append(i.price)
-
-        comments = []
-        for i in product.comments:
-            comments.append({"name": i.user.firstname, "lastname": i.user.lastname, "description": i.comment})
-
-        result = {
-            "name": product.name,
-            "description": product.description,
-            "image": _get_img_path(product.image),
-            "labels": labels,
-            "urls": urls,
-            "dollar": dollar,
-            "datasets": datasets,
-            "reviews": comments
-        }
-
+            result = {
+                "name": product.name,
+                "description": product.description,
+                "image": _get_img_path(product.image),
+                "labels": labels,
+                "urls": urls,
+                "dollar": dollar,
+                "datasets": datasets,
+                "reviews": comments
+            }
+    except:
+        pass
+    
     return result

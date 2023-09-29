@@ -9,17 +9,18 @@
       <tr>
         <td class="left-width">
           <div class="inline-container">
-            <img id="img" class="product-image" src="{% static 'img/product.jpg' %}"/>
-            <div class="button">Загрузить изображение</div>
+            <img id="img" class="product-image" src="{% static 'img/no-photo.jpg' %}"/>
+            <label id="upload-label" class="button" for="upload">Загрузить изображение</label>
+            <input id="upload" type="file" style="visibility:hidden;"/></div>
         </div>
         </td>
 
         <td>
           <div>
-            <div id="name">Название товара:</div>
-            <input type="text"/>
-            <div id="description">Описание товара:</div>
-            <textarea rows="9"></textarea>
+            <div>Название товара:</div>
+            <input id="name" type="text" value="Simple ground"/>
+            <div>Описание товара:</div>
+            <textarea id="description" rows="9">Dтдвыа ывжаьываы влдыв адыва </textarea>
           </div>
         </td>
       </tr>
@@ -27,12 +28,12 @@
 
    
 
-    <table id="shops-table">
-      {% for i in "rtyegs" %}
+    <table>
+      {% for i in shops %}
       <tr>
-        <td>Citilink</td>
+        <td>{{ i.name }}</td>
         <td class="url">
-          <input id="dns" type="text"/>
+          <input id="{{ i.id }}" alt="{{ i.name }}" type="text"/>
         </td>
       </tr>
       {% endfor %}
@@ -41,7 +42,7 @@
     <div id="test" class="button">Проверить данные</div>
 
     <table id="shops-table" class="report">
-      {% for i in "rtyegs" %}
+      <!-- {% for i in "rtyegs" %}
       <tr>
         <td>Citilink</td>
         <td class="name">
@@ -54,25 +55,23 @@
           100 $
         </td>
       </tr>
-      {% endfor %}
+      {% endfor %} -->
     </table>
 
     <div id="save" class="button disabled-button">Сохранить изменения</div>
 
-    
+    {% csrf_token %} 
   
 
 {% endblock content %}        
 
 
 {% block footer %}
-  <!-- <script type="text/javascript" src="{% static 'js/libs/chart.js' %}"></script>
+  <script type="module" src="{% static 'js/modules/load_json.js' %}"></script>
+  <script type="module" src="{% static 'js/modules/parseCookies.js' %}"></script>
   <script type="module" src="{% static 'js/modules/currencyConverter.js' %}"></script>
-  <script type="module" src="{% static 'js/modules/shopList.js' %}"></script>
-  <script type="module" src="{% static 'js/modules/drawChart.js' %}"></script>
-  <script type="module" src="{% static 'js/modules/reviews.js' %}"></script>
 
-  <script type="module" src="{% static 'js/product.js' %}"></script> -->
+  <script type="module" src="{% static 'js/add_product.js' %}"></script> 
 {% endblock footer %}
 
 

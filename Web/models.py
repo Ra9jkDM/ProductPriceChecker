@@ -133,7 +133,7 @@ def add_test_data():
                   "Сушилка для рук G-TEQ 8860 PS"]
 
     images = ["1.jpg", "2.jpg", "3.jpg", "4.jpg"]
-    shops = ["Citilink", "Positronica", "Video-shoper", "Regard"]
+    shops = ["Citilink", "Positronica", "Video-shoper", "Regard", "Y.market", "M.video"]
 
     roles = ["Admin", "User"]
     users = [["reer@gmail.com", 1, "Bob", "Rore"],

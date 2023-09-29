@@ -3,6 +3,7 @@ import {getRubPrice, getDolPriceNumber, getDolPrice} from "./modules/currencyCon
 import { createShopList } from "./modules/shopList.js";
 import { createReviews, appendReview } from "./modules/reviews.js";
 import {getJSON} from "./modules/load_json.js"
+import { parseCookie } from "./modules/parseCookies.js";
 
 
 const active_color = 'wheat';
@@ -33,9 +34,6 @@ function setMainPrice(input, len) {
 function setName(name) {
     const product_name = document.getElementById("name");
     product_name.textContent = name;
-}
-function getName() {
-    return document.getElementById("name").innerText;
 }
 
 function convertToDollarPrice(prices) {
@@ -98,8 +96,15 @@ function setImage(img) {
     document.getElementById("img").src = img;
 }
 
+function getID() {
+    let id=-1;
+    let json = parseCookie(document.cookie);
+    id = json.id;
 
-let id = getName();
+    return id;
+}
+
+let id = getID();
 
 let json = getJSON("/api/product?id="+ id);
 

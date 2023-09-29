@@ -3,7 +3,7 @@
 
 {% block content %}
     <div class="info">
-        <div class="name left" id="name">{{ id }}</div>
+        <div class="name left" id="name"></div>
 
         <div class="right">
             <div class="price" id="price-rub">2799  ₽</div>
@@ -17,20 +17,7 @@
         
 
     <div id="shops">
-          <!-- <div class="shop" onclick="window.open('http://google.com','EE');">
-            <div class="name">Ситилинк</div>
-            <div class="price">
-              <div id="price-rub">2799 ₽</div>
-              <div id="price-dol">29.0 $</div>
-            </div>
-          </div>-->
-          
-          
-          <!-- <div>М.Видео</div>
-          <div>Regard</div>
-          <div>Ya.Market</div>
-          <div>video-shoper</div>
-          <div>Positronika</div> -->
+
     </div>
 
     <div id="changePrice">
@@ -43,33 +30,11 @@
     </div>
     <div>Описание</div>
     <div id="product-description">
-      <!-- <pre>Страна:   Китай
-Гарантия:  1 год
-Срок службы: 2 года
-Модель:  Hi EK-17C23
-Серия:   Hi EK-17C
 
-Обратите внимание:   Защита от включения без воды
-Удачное решение:   Дисплей с отображением температуры
-Важная особенность:  Двойные стенки
-Пользователи оценят:   Мощность 2000Вт, объём 1.7 л.
-Хорошо придумано:  Кипячение и подгорев воды
-Максимальный объем:  1.7 л
-Потребляемая мощность:   2000 Вт
-Длина сетевого шнура:  0.8 м
-Диапазон температур:   40-100 *С
-Материал корпуса:  нержавеющая сталь/ пластик</pre>-->
     </div> 
     <div >Отзывы</div>
     <div class="reviews" id="reviews">
-          <!-- <div class="review">
-            <div class="name">
-              Bob
-            </div>
-            <div class="description">
-              Бесплатный онлайн перевод с английского и других языков на русский и обратно. Переводчик работает со словами, текстами, а также веб-страницами и надписями ..
-            </div>
-          </div> -->
+          
     </div>
   
     <div class="make-review">
@@ -87,6 +52,7 @@
   <script type="module" src="{% static 'js/modules/drawChart.js' %}"></script>
   <script type="module" src="{% static 'js/modules/reviews.js' %}"></script>
   <script type="module" src="{% static 'js/modules/load_json.js' %}"></script>
+  <script type="module" src="{% static 'js/modules/parseCookies.js' %}"></script>
 
   <script type="module" src="{% static 'js/product.js' %}" defer></script>
 {% endblock footer %}

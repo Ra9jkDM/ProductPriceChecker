@@ -220,18 +220,25 @@ table div textarea {
   width: 100%;
 }
 
+#upload-label {
+  display: block;
+  margin-top: 5px;
+  width: 300px;
+}
+
 #shops-table {
   margin-top: 30px;
 }
-#shops-table .url {
+#shops-table .price {
+  font-family: Apple-mono;
+}
+
+.url {
   width: 100%;
   padding-left: 10px;
 }
-#shops-table .url input {
+.url input {
   width: 100%;
-}
-#shops-table .price {
-  font-family: Apple-mono;
 }
 
 .report tr:nth-child(even) {

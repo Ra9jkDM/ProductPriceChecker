@@ -1,15 +1,21 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound
 
+from ..database import shops  
+
 def index(request):
     return render(request, 'index.html')
 
 def product(request):
     id = request.GET.get("id")
-    return render(request, 'product.html', context={"id": id})
+
+    response = render(request, 'product.html')
+    response.set_cookie('id', id, max_age=30)
+    return response
 
 def add_product(request):
-    return render(request, 'add_product.html')
+    data = shops.get_shops()
+    return render(request, 'add_product.html', context={"shops": data})
 
 def about(request):
     return render(request, 'about.html')
