@@ -121,5 +121,11 @@ save.onclick = function() {
     console.log(formData, file);
     sendForm("/api/product", token, formData).then(function(e) {
         console.log(e);
+
+        if (e.status == "error") {
+            alert("Возникла ошибка при добавлении продукта.");
+        } else {
+            window.location = '/';
+        }
     });
 };

@@ -3,6 +3,8 @@ from Web.models import ENGINE, Currency, ExchangeRates, Product, ProductPrice, S
 
 from ..database.modules import date_controller
 
+from ..S3 import main as s3
+
 IMAGE_PATH = "Web/upload"
 CURRENT_PATH = "products"
 
@@ -133,35 +135,42 @@ def _get_extension(file):
 
 def _save_image(file, name):
     ext = _get_extension(file)
-    with open(f"{IMAGE_PATH}/{CURRENT_PATH}/{name}.{ext}", "wb+") as f:
-        for chunk in file.chunks():
-            f.write(chunk)
+    filename = f"{name}.{ext}"
+    s3.upload_object(CURRENT_PATH, filename, file)
     
     return f"{name}.{ext}"
 
 def save_product(data, file):
-    with Session(autoflush=True, bind=ENGINE) as db:
-        product = Product( name=data["name"], description = data["description"])
-        db.add(product)
-        db.commit()
-        print(product.id)
+    result = {"status": "ok"}
+    try:
+        if data["name"]=="":
+            raise Exception("Empty name")
+        with Session(autoflush=True, bind=ENGINE) as db:
+            product = Product( name=data["name"], description = data["description"])
+            db.add(product)
+            db.commit()
+            print(product.id)
 
-        # Save image
-        image_name = _save_image(file, product.id)
-        product.image = image_name
-        db.commit()
-
-        # Save url
-        for i in data["urls"]:
-            shop_id = db.query(Shop).filter(Shop.name == i["name"]).first().id
-            url = Url(product_id=product.id, shop_id=shop_id, url=i["url"])
-            db.add(url)
+            # Save image
+            image_name = _save_image(file, product.id)
+            product.image = image_name
             db.commit()
 
-            now = date_controller.get_now()
-            db.add(ProductPrice(url_id=url.id, date=now, price=i["price"]))
+            # Save url
+            for i in data["urls"]:
+                shop_id = db.query(Shop).filter(Shop.name == i["name"]).first().id
+                url = Url(product_id=product.id, shop_id=shop_id, url=i["url"])
+                db.add(url)
+                db.commit()
 
-        db.commit()
+                now = date_controller.get_now()
+                db.add(ProductPrice(url_id=url.id, date=now, price=i["price"]))
+
+            db.commit()
+    except:
+        result["status"]="error"
+    
+    return result
         
         
        

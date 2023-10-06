@@ -2,11 +2,11 @@
 /* sass -w sass/styles.scss css/styles.css */
 @font-face {
   font-family: Apple;
-  src: url(../fonts/SFProDisplay-Ultralight.woff);
+  src: url(/fonts/SFProDisplay-Ultralight.woff);
 }
 @font-face {
   font-family: Apple-mono;
-  src: url(../fonts/sf-mono-regular.otf);
+  src: url(/fonts/sf-mono-regular.otf);
 }
 #slider {
   margin-top: 45px;
@@ -27,6 +27,7 @@
 }
 .product .image {
   height: 180px;
+  min-height: 180px;
   width: auto;
   max-width: 180px;
 }

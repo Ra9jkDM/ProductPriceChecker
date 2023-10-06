@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from Web.views.views import index, product, add_product, about, images
+from Web.views.views import index, product, add_product, about, images, fonts, upload_images
 from Web.views.api import api
 from Web.views.proxy import proxy
 
@@ -27,7 +27,9 @@ urlpatterns = [
     path('add_product/', add_product),
     path('about/', about),
 
-    path('img/<str:path>/<str:name>', images),
+    path('img/<str:name>', images),
+    path('fonts/<str:name>', fonts),
+    path('img/<str:path>/<str:name>', upload_images),
 
     path("api/", include(api)),
     path("proxy/", include(proxy)),

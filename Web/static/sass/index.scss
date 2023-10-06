@@ -22,6 +22,7 @@ $name-height: 36px;
 
     .image {
         height: $image-size;
+        min-height: $image-size;
         width: auto;
         max-width: $image-size;
     }

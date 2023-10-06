@@ -1,4 +1,5 @@
 .env
+Web/S3/source/test_files/*
 db.sqlite3
 price_watcher.db
 

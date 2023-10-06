@@ -9,7 +9,7 @@
       <tr>
         <td class="left-width">
           <div class="inline-container">
-            <img id="img" class="product-image" src="{% static 'img/no-photo.jpg' %}"/>
+            <img id="img" class="product-image" src="/img/no-photo.jpg"/>
             <label id="upload-label" class="button" for="upload">Загрузить изображение</label>
             <input id="upload" type="file" style="visibility:hidden;"/></div>
         </div>
@@ -18,9 +18,9 @@
         <td>
           <div>
             <div>Название товара:</div>
-            <input id="name" type="text" value="Simple ground"/>
+            <input id="name" type="text" value=""/>
             <div>Описание товара:</div>
-            <textarea id="description" rows="9">Dтдвыа ывжаьываы влдыв адыва </textarea>
+            <textarea id="description" rows="9"></textarea>
           </div>
         </td>
       </tr>
@@ -42,20 +42,7 @@
     <div id="test" class="button">Проверить данные</div>
 
     <table id="shops-table" class="report">
-      <!-- {% for i in "rtyegs" %}
-      <tr>
-        <td>Citilink</td>
-        <td class="name">
-          Электрочайник Hi EK-17C23
-        </td>
-        <td class="price">
-          100 ₽
-        </td>
-        <td class="price">
-          100 $
-        </td>
-      </tr>
-      {% endfor %} -->
+
     </table>
 
     <div id="save" class="button disabled-button">Сохранить изменения</div>
