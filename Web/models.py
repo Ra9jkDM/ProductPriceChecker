@@ -1,16 +1,26 @@
 from __future__ import annotations
 
 from sqlalchemy import create_engine, Column, Integer, Float, String, Date, ForeignKey, select, Boolean
-from sqlalchemy.orm import declarative_base, sessionmaker, Session, relationship, mapped_column, Mapped, relationship
+from sqlalchemy.orm import declarative_base, sessionmaker, Session, relationship, mapped_column, Mapped, relationship, backref
 
 from typing import List
 from datetime import datetime, date
 
+from os import environ
+
 import random
 
 
+USERNAME = environ.get("BD_USERNAME")
+PASSWORD = environ.get("DB_PASSWORD")
 
-ENGINE = create_engine("sqlite:///price_watcher.db") #, echo=True)
+HOST = environ.get("DB_HOST")
+PORT = environ.get("DB_PORT")
+
+DATABASE = environ.get("DB_DATABASE")
+
+
+ENGINE = create_engine(f"postgresql+psycopg2://{USERNAME}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}") #, echo=True)
 
 
 Base = declarative_base()
@@ -19,10 +29,10 @@ Base = declarative_base()
 class Product(Base):
     __tablename__ = "product"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[String] = mapped_column(String ,unique=True, nullable=False)
-    description: Mapped[String] = mapped_column(String, nullable=True)
-    image: Mapped[String] = mapped_column(String, nullable=True)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, unique=True)
+    name: Mapped[String] = mapped_column(String(100) ,unique=True, nullable=False)
+    description: Mapped[String] = mapped_column(String(2000), nullable=True)
+    image: Mapped[String] = mapped_column(String(1000), nullable=True)
 
     urls: Mapped[List["Url"]] = relationship()
     comments: Mapped[List["Comment"]] = relationship()
@@ -30,60 +40,60 @@ class Product(Base):
 class Shop(Base):
     __tablename__ = "shop"
 
-    id:Mapped[int] = mapped_column(Integer, primary_key=True)
-    name:Mapped[String] = mapped_column(String, unique=True, nullable=False)
+    id:Mapped[int] = mapped_column(Integer, primary_key=True, unique=True)
+    name:Mapped[String] = mapped_column(String(100), unique=True, nullable=False)
 
     urls: Mapped[List["Url"]] = relationship()
 
 class Url(Base):
     __tablename__ = "url"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, unique=True, autoincrement=True)
 
-    product_id: Mapped[int] = mapped_column(ForeignKey("product.id"),primary_key=True)
-    shop_id: Mapped[int] = mapped_column(ForeignKey("shop.id"), primary_key=True)
+    product_id: Mapped[int] = mapped_column(ForeignKey("product.id", ondelete="CASCADE"),primary_key=True)
+    shop_id: Mapped[int] = mapped_column(ForeignKey("shop.id", ondelete="CASCADE"), primary_key=True)
 
-    url: Mapped[String] = mapped_column(String, nullable=False)
+    url: Mapped[String] = mapped_column(String(500), nullable=False)
 
-    product: Mapped[List["Product"]] = relationship()
-    shop: Mapped[List["Shop"]] = relationship()
+    product: Mapped[List["Product"]] = relationship('Product', backref=backref('url', passive_deletes=True))
+    shop: Mapped[List["Shop"]] = relationship('Shop', backref=backref('url', passive_deletes=True))
     prices: Mapped[List["ProductPrice"]] = relationship()
 
 
 class ProductPrice(Base):
     __tablename__ = "product_price"
 
-    url_id: Mapped[int] = mapped_column(ForeignKey("url.id"), primary_key=True)
+    url_id: Mapped[int] = mapped_column(ForeignKey("url.id", ondelete="CASCADE"), primary_key=True)
     date: Mapped[Date] = mapped_column(Date, primary_key=True)
 
     price:Mapped[int] = mapped_column(Integer)
 
-    url: Mapped[List["Url"]] = relationship()
+    url: Mapped[List["Url"]] = relationship('Url', backref=backref('product_price', passive_deletes=True))
 
 
 class Role(Base):
     __tablename__ = "role"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[String] = mapped_column(String, nullable=False, unique=True)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, unique=True)
+    name: Mapped[String] = mapped_column(String(100), nullable=False, unique=True)
 
     users: Mapped[List["User"]] = relationship()
 
 class User(Base):
     __tablename__ = "user"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
-    email: Mapped[String] = mapped_column(String, nullable=False, unique=True)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, unique=True)
+    email: Mapped[String] = mapped_column(String(200), nullable=False, unique=True)
 
-    sault: Mapped[String] = mapped_column(String, nullable=False) # Соль
-    password: Mapped[String] = mapped_column(String, nullable=False) # Хеш пароля
+    sault: Mapped[String] = mapped_column(String(100), nullable=False) # Соль
+    password: Mapped[String] = mapped_column(String(500), nullable=False) # Хеш пароля
 
     # sault + password | use SHA1, SHA512
 
     role_id: Mapped[int] = mapped_column(ForeignKey("role.id"), nullable=False)
 
-    firstname: Mapped[String] = mapped_column(String, nullable=False)
-    lastname: Mapped[String] = mapped_column(String, nullable=False)
+    firstname: Mapped[String] = mapped_column(String(100), nullable=False)
+    lastname: Mapped[String] = mapped_column(String(100), nullable=False)
     active: Mapped[Boolean] = mapped_column(Boolean, default=True)
 
     role: Mapped["Role"] = relationship()
@@ -92,23 +102,23 @@ class User(Base):
 class Comment(Base):
     __tablename__ = "comment"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, unique=True)
 
-    product_id: Mapped[int] = mapped_column(ForeignKey("product.id"), nullable=False)
-    user_id: Mapped[int] = mapped_column(ForeignKey("user.id"), nullable=False)
+    product_id: Mapped[int] = mapped_column(ForeignKey("product.id", ondelete="CASCADE"), nullable=False)
+    user_id: Mapped[int] = mapped_column(ForeignKey("user.id", ondelete="CASCADE"), nullable=False)
 
-    comment: Mapped[String] = mapped_column(String, nullable=False)
+    comment: Mapped[String] = mapped_column(String(1500), nullable=False)
     stars: Mapped[int] = mapped_column(Integer, nullable=False)
 
-    product: Mapped["Product"] = relationship()
-    user: Mapped["User"] = relationship()
+    product: Mapped["Product"] = relationship('Product', backref=backref('comment', passive_deletes=True))
+    user: Mapped["User"] = relationship('User', backref=backref('comment', passive_deletes=True))
 
 
 class Currency(Base):
     __tablename__ = "currency"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key = True)
-    name: Mapped[String] = mapped_column(String, unique=True, nullable=False)
+    id: Mapped[int] = mapped_column(Integer, primary_key = True, unique=True)
+    name: Mapped[String] = mapped_column(String(100), unique=True, nullable=False)
 
     exchange_rates: Mapped[List["ExchangeRates"]] = relationship()
 
@@ -116,10 +126,10 @@ class ExchangeRates(Base):
     __tablename__ = "exchange_rate"
 
     date: Mapped[Date] = mapped_column(Date, primary_key=True)
-    currency_id: Mapped[int] = mapped_column(ForeignKey("currency.id"), primary_key=True)
+    currency_id: Mapped[int] = mapped_column(ForeignKey("currency.id", ondelete="CASCADE"), primary_key=True)
     price: Mapped[float] = mapped_column(Float, nullable=False)
 
-    currencies: Mapped["Currency"] = relationship()
+    currencies: Mapped["Currency"] = relationship('Currency', backref=backref('exchange_rate', passive_deletes=True))
 
 
 
@@ -136,46 +146,46 @@ def add_test_data():
     shops = ["Citilink", "Positronica", "Video-shoper", "Regard", "Y.market", "M.video"]
 
     roles = ["Admin", "User"]
-    users = [["reer@gmail.com", 1, "Bob", "Rore"],
-        ["lib@gmail.com", 1, "Tom", "Rom"],
-        ["more@mail.ru", 1, "Lander", "Mos"], 
-        ["qoe@gmail.com", 1, "Cress", "Zoop"],
-        ["ads@yandex.ru", 0, "Adiv", "Urs"]]
+    users = [["reer@gmail.com", 2, "Bob", "Rore"],
+        ["lib@gmail.com", 2, "Tom", "Rom"],
+        ["more@mail.ru", 2, "Lander", "Mos"], 
+        ["qoe@gmail.com", 2, "Cress", "Zoop"],
+        ["ads@yandex.ru", 1, "Adiv", "Urs"]]
     currencies = ["Доллар", "Евро", "Така", "Франк"]
 
     comments = ["The best product", "Not bad", "It's horrible", "Woow!", 'I can recommend this product']
 
     with Session(autoflush=True, bind=ENGINE) as db:
+        
+        for i, name in enumerate(roles, start=1):
+            db.add(Role(name=name))
 
-        for i, name in enumerate(roles):
-            db.add(Role(id=i, name=name))
-
-        for i, values in enumerate(users):
+        for i, values in enumerate(users, start=1):
             db.add(User(email=values[0], sault="123", password="test_pass", role_id=values[1], firstname=values[2], lastname=values[3]))
 
 
-        for i, name in enumerate(products):
-            db.add(Product(id=i, name=name, image=random.choice(images)))
+        for i, name in enumerate(products, start=1):
+            db.add(Product(name=name, image=random.choice(images)))
             for j in range(random.randint(1, 8)):
                 db.add(Comment(product_id=i, user_id=random.randint(1, len(users)), comment=random.choice(comments), stars=random.randint(0, 5)))
+        
+        for i, name in enumerate(shops, start=1):
+            db.add(Shop(name=name))
 
-        for i, name in enumerate(shops):
-            db.add(Shop(id=i, name=name))
-
-        id = 0
-        for i, value in enumerate(products):
-            for j, name in enumerate(shops):
-                db.add(Url(id=id, product_id=i, shop_id=j, url=f"https://{name}/{value}/"))
-                for d in range(10):
+        id = 1
+        for i, value in enumerate(products, start=1):
+            for j, name in enumerate(shops, start=1):
+                db.add(Url(product_id=i, shop_id=j, url=f"https://{name}/{value}/"))
+                for d in range(1, 11):
                     db.add(ProductPrice(url_id=id, date=date(2022, 12, 1+d), price=random.randint(2500, 55000)))
 
                 id += 1
 
         
 
-        for i, name in enumerate(currencies):
-            db.add(Currency(id=i, name=name))
-            for j in range(10):
+        for i, name in enumerate(currencies, start=1):
+            db.add(Currency(name=name))
+            for j in range(1, 11):
                 db.add(ExchangeRates(date=date(2022, 12, 1+j), currency_id=i, price=random.randint(2000, 20000)/100))
         
 
@@ -216,7 +226,7 @@ def selection_of_db():
 if __name__ == "__main__":
     Base.metadata.create_all(bind=ENGINE)
 
-    # add_test_data()
+    add_test_data()
     selection_of_db()
 
 # python Web/models.py

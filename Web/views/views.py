@@ -3,6 +3,8 @@ from django.http import HttpResponse, HttpResponseNotFound
 
 from ..database import shops  
 
+IMAGE_PATH = "Web/upload"
+
 def index(request):
     return render(request, 'index.html')
 
@@ -22,7 +24,7 @@ def about(request):
 
 def images(request, path, name):
     try:
-        image_data = open(f"Web/upload/{path}/{name}", "rb").read()
+        image_data = open(f"{IMAGE_PATH}/{path}/{name}", "rb").read()
         return HttpResponse(image_data)
     except:
         return HttpResponseNotFound()

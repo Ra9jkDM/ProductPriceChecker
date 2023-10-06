@@ -6,13 +6,13 @@ import json
 from ..database import product
 
 
+
 def get_products(request):
     result = product.get_products()
     return JsonResponse(result)
 
 def get_product(request):
     if request.method == "POST":
-        # req = json.loads(request.body)
         print( request.FILES)
 
         json_data = b''
@@ -23,9 +23,13 @@ def get_product(request):
         print(json_data, json_data["name"])
 
         file = request.FILES['image']
-        with open(f"Web/upload/products/14.jpg", "wb+") as f:
-            for chunk in file.chunks():
-                f.write(chunk)
+        # print((str(file)+"..dfwef.wef.wef.wef.wef.662.gif").split(".")[-1])
+        # with open(f"Web/upload/products/14.jpg", "wb+") as f:
+        #     for chunk in file.chunks():
+        #         f.write(chunk)
+
+        product.save_product(json_data, file)
+        
 
         return JsonResponse({"status": "ok"})
     else:
