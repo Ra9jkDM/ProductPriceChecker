@@ -119,6 +119,7 @@ class Currency(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key = True, unique=True)
     name: Mapped[String] = mapped_column(String(100), unique=True, nullable=False)
+    code: Mapped[String] = mapped_column(String(5), unique=True, nullable=False)
 
     exchange_rates: Mapped[List["ExchangeRates"]] = relationship()
 
@@ -151,7 +152,10 @@ def add_test_data():
         ["more@mail.ru", 2, "Lander", "Mos"], 
         ["qoe@gmail.com", 2, "Cress", "Zoop"],
         ["ads@yandex.ru", 1, "Adiv", "Urs"]]
-    currencies = ["Доллар", "Евро", "Така", "Франк"]
+
+    currencies = [{"name": "Доллар", "code": "USD"}, 
+                {"name": "Евро", "code": "EUR"},
+                {"name": "Казахстанских тенге", "code": "KZT"}]
 
     comments = ["The best product", "Not bad", "It's horrible", "Woow!", 'I can recommend this product']
 
@@ -183,8 +187,8 @@ def add_test_data():
 
         
 
-        for i, name in enumerate(currencies, start=1):
-            db.add(Currency(name=name))
+        for i, item in enumerate(currencies, start=1):
+            db.add(Currency(name=item["name"], code=item["code"]))
             for j in range(1, 11):
                 db.add(ExchangeRates(date=date(2022, 12, 1+j), currency_id=i, price=random.randint(2000, 20000)/100))
         

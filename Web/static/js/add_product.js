@@ -84,7 +84,7 @@ check.onclick = function() {
             let table = document.getElementById("shops-table");
             table.innerHTML = "";
             for (let i of e.shops) {
-                let row = createRow(i.shop, i.product, i.price, d)
+                let row = createRow(i.shop, i.product, i.price, d.price)
                 table.appendChild(row);
             }
 

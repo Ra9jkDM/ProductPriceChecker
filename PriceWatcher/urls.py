@@ -37,6 +37,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
+
 # sass -w sass/styles.scss css/styles.css
 # export $(cat .env)
 # python manage.py runserver

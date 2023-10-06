@@ -4,10 +4,11 @@ from django.http import JsonResponse, HttpResponse
 import requests
 import json
 from datetime import datetime
+from os import environ
 
 from ..database import product, currency
 
-API_URL = "http://127.0.0.1:3000"
+API_URL = environ.get("API_URL")
 
 def shops(request):
     if request.method == 'POST':
@@ -17,17 +18,23 @@ def shops(request):
         return JsonResponse(json_response)
     return HttpResponseNotFound()
 
-def dollar(request):
+
+
+def currencies(request, code):
     now = datetime.now()
-    price = currency.get_price(now)
+    item = {"price": currency.get_price(now, code)}
 
-    if price == -1:
-        req = requests.get(API_URL+"/currency/dollar")
-        price = req.text
+    if item["price"] == -1:
+        req = requests.get(f"{API_URL}/currency?codes={code}")
+        item = json.loads(req.text)[0]
+      
+        currency.save_price(now, item["price"], item["code"])
 
-        currency.save_price(now, price)
+    return JsonResponse(item)
 
-    return HttpResponse(price)
+
+def dollar(request):
+    return currencies(None, "USD")
 
 
 proxy = [

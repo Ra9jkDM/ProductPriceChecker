@@ -5,6 +5,10 @@ from ..database import shops
 
 from ..S3 import main as s3
 
+# Task update currency prices
+from ..tasks import thread
+thread.start()
+
 
 def index(request):
     return render(request, 'index.html')
@@ -38,8 +42,4 @@ def images(request, name):
 
 def upload_images(request, path, name):
     return _s3_get_files(f"upload/{path}/{name}")
-
-# TODO return fonts from S#/MinIO and change upload dir + add 'test_files' dir to .gitignore
-# then delete 'upload/products' and 'static/img' and 'static/fonts'
-# Shedued task
 
