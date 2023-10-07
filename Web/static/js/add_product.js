@@ -84,7 +84,7 @@ check.onclick = function() {
             let table = document.getElementById("shops-table");
             table.innerHTML = "";
             for (let i of e.shops) {
-                let row = createRow(i.shop, i.product, i.price, d.price)
+                let row = createRow(i.shop, i.name, i.price, d.price)
                 table.appendChild(row);
             }
 
@@ -105,9 +105,14 @@ save.onclick = function() {
 
     let prices = []
 
+
     for (let i of data.urls) {
-        prices.push({"name": i.name, "url": i.url, 
-                    "price": upload_data.shops.filter((x)=>x.shop==i.name)[0].price});
+        let price_data = upload_data.shops.filter((x)=>x.shop==i.name)[0];
+        if (price_data != undefined){
+            prices.push({"name": i.name, "url": i.url, 
+                    "price": price_data.price});
+    
+        }
     }
     
     let json = {"name": data.name, "description": data.description,
