@@ -5,9 +5,11 @@ from ..database import shops
 
 from ..S3 import main as s3
 
-# Task update currency prices
-from ..tasks import thread
-thread.start()
+# Task update currency and product prices
+from ..tasks import currency_thread, price_thread
+
+currency_thread.start()
+price_thread.start()
 
 
 def index(request):

@@ -36,6 +36,11 @@ def currencies(request, code):
 def dollar(request):
     return currencies(None, "USD")
 
+def get_price(urls):
+    resp = requests.post(API_URL+"/shops/get", json={"shops": urls})
+    json_response = json.loads(resp.text)
+    return json_response
+
 
 proxy = [
     path("shops", shops),
