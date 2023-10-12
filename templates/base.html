@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>Save Money</title>
+
+
+        <link rel="icon" type="image/x-icon" href="/img/favicon.png"/>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+        {% block js %}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="center">
+            {% include "blocks/menu.html" %}
+        
+            {% block content %}
+
+            {% endblock content %}
+
+            <footer>
+                © SaveЧеканнаяМонета.ru ©
+            </footer>
+        </div>
+    </body>
+</html>

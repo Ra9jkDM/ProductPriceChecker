@@ -1,0 +1,39 @@
+$indent: 10px;
+
+#signup {
+    max-width: 420px;
+}
+
+.center-square-block {
+    @include border;
+    padding: $indent;
+
+    margin: 50% auto;
+    max-width: 350px;
+
+
+    table {
+        text-align:  left;
+        margin-top: $indent;
+
+        td {
+            width: 100%;
+        }
+    }
+
+    button {
+        width: 100%;
+        background-color: transparent;
+    }
+}
+
+.error {
+    color: rgb(197, 22, 51);
+}
+
+.active {
+    padding: 0 5px ;
+    font-size: 25px;
+    color: white !important;
+    background-color: black;
+}

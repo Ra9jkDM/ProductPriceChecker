@@ -1,6 +1,9 @@
 .env
-Web/S3/source/test_files/*
-db.sqlite3
-price_watcher.db
+.env_json
+.venv
+
+S3/source/test_files/*
+static/css/styles.css.map
+
 
 **/__pycache__

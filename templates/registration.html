@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form class="center-square-block" id="signup" method="POST" action="">
+    Регистрация
+    <table>
+        <tr>
+            <td>Имя:</td>
+            <td>
+                <input type="text" name="firstname" placeholder="Имя">
+            </td>
+        </tr>
+        <tr>
+            <td>Фамилия:</td>
+            <td>
+                <input type="text" name="lastname" placeholder="Фамилия">
+            </td>
+        </tr>
+        <tr>
+            <td>Логин:</td>
+            <td>
+                <input type="email" name="email" placeholder="Почта">
+            </td>
+        </tr>
+        <tr>
+            <td>Пароль:</td>
+            <td>
+                <input type="password" name="password" placeholder="Пароль">
+            </td>
+        </tr>
+        <tr>
+            <td>Повторите пароль:</td>
+            <td>
+                <input type="password" name="password" placeholder="Пароль">
+            </td>
+        </tr>
+    </table>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="error">
+            {{ messages[0] }}
+        </div>
+    {% endif %}
+    {% endwith %}
+    <br>
+    Уже есть аккаунт <a class="active" href="{{ url_for('users.login')}}">авторизируйтесь!</a>
+    <button class="button">Зарегистрироваться</button>
+
+</form>
+
+{% endblock content %}

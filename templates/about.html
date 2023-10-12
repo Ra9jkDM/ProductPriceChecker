@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block js %}
+  <script defer type="text/javascript" src="{{ url_for('static', filename='js/about.js') }}"></script>
+{% endblock js %}
+
+{% block content %}
+<div class="info">О нас</div>
+        
+<img id="triangle" src="/img/triangle.png"/><br>
+<img id="wheel" src="/img/wheel.png"/>
+             
+<div id="get-fact" onclick="getFact()">Узнать факты о компании!</div>
+<div id="fact">
+
+</div>
+{% endblock content %}
+

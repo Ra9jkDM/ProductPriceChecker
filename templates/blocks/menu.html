@@ -1,0 +1,27 @@
+<div class="menu">
+    <a href="{{ url_for('view.index') }}">
+        <div class="item left">Главная</div>
+    </a>
+    {% if current_user.is_authenticated %}
+    <a href="{{ url_for('view.add_product') }}">
+        <div class="item left">Добавить товар</div>
+    </a>
+    {% endif %}
+    <a href="{{ url_for('view.about') }}">
+        <div class="item left" >О нас</div> 
+    </a>
+    
+    
+    <div class="item-right">
+        {% if not current_user.is_authenticated %}
+        <a href="{{ url_for('users.login') }}">
+            <div class="item ">Войти</div>
+        </a>
+        {% else %}
+        <a href="{{ url_for('users.logout') }}">
+            <div class="item ">{{ name }}</div>
+        </a>
+        {% endif %}
+    </div>
+   
+</div>

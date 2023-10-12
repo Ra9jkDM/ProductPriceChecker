@@ -1,0 +1,59 @@
+{% extends "base.html"%}
+
+{% block js %}
+  <script defer type="text/javascript" src="{{ url_for('static', filename='js/libs/chart.js') }}"></script>
+  <script defer type="module" src="{{ url_for('static', filename='js/modules/currencyConverter.js') }}"></script>
+  <script defer type="module" src="{{ url_for('static', filename='js/modules/shopList.js') }}"></script>
+  <script defer type="module" src="{{ url_for('static', filename='js/modules/drawChart.js') }}"></script>
+  <script defer type="module" src="{{ url_for('static', filename='js/modules/reviews.js') }}"></script>
+  <script defer type="module" src="{{ url_for('static', filename='js/modules/load_json.js') }}"></script>
+  <script defer type="module" src="{{ url_for('static', filename='js/modules/parseCookies.js') }}"></script>
+
+  <script defer type="module" src="{{ url_for('static', filename='js/product.js') }}"></script>
+{% endblock js %}
+
+{% block content %}
+<div id="id" style="display: none;">{{ id }}</div>
+    <div class="info">
+        <div class="name left" id="name"></div>
+        
+        <div class="right">
+            <div class="price" id="price-rub">2799  ₽</div>
+                <div class="price" id="price-dol">29.0 $</div>
+            </div>
+    </div>
+
+
+        
+    <img id="img" class="product-image left"/>
+        
+
+    <div id="shops">
+
+    </div>
+
+    <div id="changePrice">
+        <div id="rub">Цены в рублях</div>
+        <div id="dol">Цены в долларах</div>
+    </div>
+    <div class="chart">
+      <canvas id="rub-chart"></canvas>
+      <canvas id="dol-chart"></canvas>
+    </div>
+    <div>Описание</div>
+    <div id="product-description">
+
+    </div> 
+    <div >Отзывы</div>
+    <div class="reviews" id="reviews">
+          
+    </div>
+  
+    {% if current_user.is_authenticated %}
+      <div class="make-review">
+        <div>Оставить отзыв</div>
+        <textarea id="new-review"></textarea>
+        <div id="send">Отправить</div>
+      </div>
+    {% endif %}
+{% endblock content %}        

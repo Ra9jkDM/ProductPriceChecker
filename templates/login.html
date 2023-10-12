@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form class="center-square-block" id="login" method="POST" action="">
+    Авторизация
+    <table>
+        <tr>
+            <td>Логин:</td>
+            <td>
+                <input type="email" name="email" placeholder="Почта">
+            </td>
+        </tr>
+        <tr>
+            <td>Пароль:</td>
+            <td>
+                <input type="password" name="password" placeholder="Пароль">
+            </td>
+        </tr>
+    </table>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="error">
+            {{ messages[0] }}
+        </div>
+    {% endif %}
+    {% endwith %}
+    <br>
+    Нет аккаунта на сайте <a class="active" href="{{ url_for('users.registration')}}">зарегистрируйтесь!</a>
+    <button class="button">Войти</button>
+
+</form>
+
+{% endblock content %}

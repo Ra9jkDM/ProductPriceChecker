@@ -1,0 +1,58 @@
+{% extends "base.html"%}
+
+
+{% block js %}
+  <script defer type="module" src="{{ url_for('static', filename='js/modules/load_json.js') }}"></script>
+  <script defer type="module" src="{{ url_for('static', filename='js/modules/parseCookies.js') }}"></script>
+  <script defer type="module" src="{{ url_for('static', filename='js/modules/currencyConverter.js') }}"></script>
+
+  <script defer type="module" src="{{ url_for('static', filename='js/add_product.js') }}"></script> 
+{% endblock js %}
+
+{% block content %}
+    <div class="info">
+    </div>
+
+    <table>
+      <tr>
+        <td class="left-width">
+          <div class="inline-container">
+            <img id="img" class="product-image" src="/img/no-photo.jpg"/>
+            <label id="upload-label" class="button" for="upload">Загрузить изображение</label>
+            <input id="upload" type="file" style="visibility:hidden;"/></div>
+        </div>
+        </td>
+
+        <td>
+          <div>
+            <div>Название товара:</div>
+            <input id="name" type="text" value=""/>
+            <div>Описание товара:</div>
+            <textarea id="description" rows="9"></textarea>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+   
+
+    <table>
+      {% for i in shops %}
+      <tr>
+        <td>{{ i.name }}</td>
+        <td class="url">
+          <input id="{{ i.id }}" alt="{{ i.name }}" type="text"/>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <div id="test" class="button">Проверить данные</div>
+
+    <table id="shops-table" class="report">
+
+    </table>
+
+    <div id="save" class="button disabled-button">Сохранить изменения</div>
+
+{% endblock content %}        
