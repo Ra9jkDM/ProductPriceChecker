@@ -76,7 +76,7 @@ let check = document.getElementById("test");
 check.onclick = function() {
     let data = collect_data();
     let token = "123";//parseCookie(document.cookie)["csrftoken"]
-    sendJSON("/proxy/shops", token, data).then(function(e) {
+    sendJSON("/proxy/shops", data).then(function(e) {
         console.log(e);
         upload_data = e;
         getJSON("/proxy/dollar").then(function(d) {
@@ -124,7 +124,7 @@ save.onclick = function() {
     formData.append("data", new Blob([JSON.stringify(json)], {'type': "application/json"}));
 
     console.log(formData, file);
-    sendForm("/api/product", token, formData).then(function(e) {
+    sendForm("/api/product", formData).then(function(e) {
         console.log(e);
 
         if (e.status == "error") {

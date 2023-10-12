@@ -112,10 +112,15 @@ $footer-padding: 100px;
         text-align: left;
         margin-bottom: 5px;
 
+        img {
+            width: 25px;
+            vertical-align: text-top;
+            padding-left: 10px;
+        }
+
         .description {
             font-size: $review-font-size;
         }
-
         
     }
 }

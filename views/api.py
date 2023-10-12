@@ -4,7 +4,7 @@ import json
 
 from .modules.decorators import is_admin
 
-from database import product, comment
+from database import product, comment, role
 
 api = Blueprint("api", __name__)
 
@@ -45,5 +45,19 @@ def _get_json_data(bytes_data):
 @login_required
 def add_comment():
     json_data = json.loads(request.data)
-    comment.create_comment(json_data["product_id"], current_user.id, json_data["comment"], 3)
-    return {"name": current_user.firstname}
+    id = comment.create_comment(json_data["product_id"], current_user.id, json_data["comment"], 3)
+    return {"id": id, "name": current_user.firstname}
+
+@api.route("/delete_comment", methods=["POST"])
+@login_required
+def delete_comment():
+    json_data = json.loads(request.data)
+    id = json_data["id"]
+    user = comment.get_user(id)
+
+    if role.is_admin(current_user) or current_user.id == user.id:
+        comment.delete_comment(id)
+        return {"status": "ok"}
+
+    return {"status": "error"}
+

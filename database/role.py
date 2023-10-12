@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from enum import Enum
 
-from models import ENGINE, Role
+from models import ENGINE, Role, User
 
 class Roles(Enum):
     admin = "Admin"
@@ -13,6 +13,7 @@ def get_role(role):
         return db.query(Role).filter_by(name=role.value).first()
 
 def is_admin(user):
-    if user.role_id == get_role(Roles.admin).id:
-        return True
+    if isinstance(user, User):
+        if user.role_id == get_role(Roles.admin).id:
+            return True
     return False

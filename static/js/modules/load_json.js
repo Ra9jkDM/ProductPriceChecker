@@ -3,26 +3,23 @@ export async function getJSON(url) {
     return await response.json();
 }
 
-export async function sendJSON(url, csrftoken, json) {
+export async function sendJSON(url, json) {
     const response = await fetch(url, {
         method: "POST",
         body: JSON.stringify(json), 
         headers: {
                     'Accept': 'application/json',
                     "Content-type": "application/json; charset=UTF-8",
-                    'X-CSRFToken': csrftoken
                 }
         });
     return await response.json();
 }
 
-export async function sendForm(url, csrftoken, form) {
+export async function sendForm(url, form) {
     const response = await fetch(url, {
         method: "POST",
         body: form, 
-        headers: {
-                    'X-CSRFToken': csrftoken
-                }
+        headers: {   }
         });
     return await response.json();
 }

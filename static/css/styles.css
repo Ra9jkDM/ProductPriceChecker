@@ -177,6 +177,11 @@
   text-align: left;
   margin-bottom: 5px;
 }
+.reviews .review img {
+  width: 25px;
+  vertical-align: text-top;
+  padding-left: 10px;
+}
 .reviews .review .description {
   font-size: 15px;
 }

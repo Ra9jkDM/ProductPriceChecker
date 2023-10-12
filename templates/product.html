@@ -14,6 +14,9 @@
 
 {% block content %}
 <div id="id" style="display: none;">{{ id }}</div>
+<div id="user_id" style="display: none;">{{ user_id }}</div>
+<div id="is_admin" style="display: none;">{{ current_user|is_admin }}</div>
+
     <div class="info">
         <div class="name left" id="name"></div>
         

@@ -93,7 +93,7 @@ def _fill_dollar_price(db, start_day, currency_name):
 def _fill_comments(product):
     comments = []
     for i in product.comments:
-        comments.append({"name": i.user.firstname, "lastname": i.user.lastname, "description": i.comment})
+        comments.append({"id": i.id, "user_id": i.user.id, "name": i.user.firstname, "lastname": i.user.lastname, "description": i.comment})
     
     return comments
 

@@ -1,13 +1,14 @@
 import { drawChart } from "./modules/drawChart.js";
 import {getRubPrice, getDolPriceNumber, getDolPrice} from "./modules/currencyConverter.js";
 import { createShopList } from "./modules/shopList.js";
-import { createReviews, appendReview, createNewReview } from "./modules/reviews.js";
+import { createReviews, createNewReview } from "./modules/reviews.js";
 import {getJSON} from "./modules/load_json.js"
-import { parseCookie } from "./modules/parseCookies.js";
+// import { parseCookie } from "./modules/parseCookies.js";
 
 
 const active_color = 'wheat';
 const base_color = 'white';
+
 
 function sortByASC(input){
     return input.sort(function(a, b) {
@@ -97,10 +98,7 @@ function setImage(img) {
 }
 
 function getID() {
-    let id=-1;
-    let json = parseCookie(document.cookie);
-    id = json.id;
-
+    let id = document.getElementById("id").innerHTML;
     return id;
 }
 
