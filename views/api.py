@@ -2,6 +2,8 @@ from flask import Blueprint, request
 from flask_login import login_required, current_user
 import json
 
+from .modules.decorators import is_admin
+
 from database import product, comment
 
 api = Blueprint("api", __name__)
@@ -18,6 +20,7 @@ def get_product():
 
 @api.route("/product", methods=["POST"])
 @login_required
+@is_admin
 def add_product_post():
     json_data = _get_json_data(request.files["data"])
     json_data = json.loads(json_data)

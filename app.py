@@ -5,6 +5,9 @@ from os import environ
 from sqlalchemy.orm import Session
 
 from models import ENGINE, User
+
+from jinja_functions import register_jinja_functions
+
 from tasks import update_currency_thread, update_product_price_thread
 
 import urls
@@ -17,6 +20,8 @@ def create_app():
 
     register_login_manager(app)
     urls.register_blueprints(app)
+    register_jinja_functions()
+
     # create_scheduled_tasks()
 
     return app

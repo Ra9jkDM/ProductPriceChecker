@@ -20,9 +20,13 @@ def login_post():
 
     client = user.get_user(email, password)
 
-    if not client: # ToDo check pass
+    if not client:
         flash("Неверный логин или пароль.")
-        return redirect(url_for("users.login"))
+        return login()
+
+    if not client.is_active:
+        flash("Учетная запись отключена.")
+        return login()
 
     login_user(client, remember=False)
     return redirect(url_for("view.index"))
@@ -32,10 +36,35 @@ def login_post():
 def registration():
     return render_template("registration.html")
 
-@users.route("/registration")
+@users.route("/registration", methods=["POST"])
 @is_not_authenticated
 def registration_post():
-    pass # ToDo
+    print("sun")
+    form = request.form
+
+    firstname = form.get("firstname")
+    lastname = form.get("lastname")
+
+    email = form.get("email")
+    password = form.get("password")
+    password_second = form.get("password_second")
+
+    if not user.is_email_unique(email):
+        flash("Аккаунт с таким адресом электронной почты существует.")
+        return registration()
+    
+    if len(password) < 8:
+        flash("Пароль должен содержать 8 символов")
+        return registration()
+
+    if password != password_second:
+        flash("Пароли не совпадают")
+        return registration()
+
+    user.create_user(email, password, firstname, lastname)
+
+    return login()
+
 
 @users.route("/logout")
 @login_required

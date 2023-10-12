@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, make_response, request
 from flask_login import login_required, current_user
 
+from .modules.decorators import is_admin
+
 from database import shop
 
 from models import User
@@ -24,6 +26,7 @@ def product():
 
 @view.route("/add_product")
 @login_required
+@is_admin
 def add_product():
     data = shop.get_shops()
     return render_template("add_product.html", name=_get_name(), shops=data)

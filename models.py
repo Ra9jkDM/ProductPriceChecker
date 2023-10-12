@@ -87,11 +87,7 @@ class User(UserMixin, Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, unique=True)
     email: Mapped[String] = mapped_column(String(200), nullable=False, unique=True)
-
-    sault: Mapped[String] = mapped_column(String(100), nullable=False) # Соль
     password: Mapped[String] = mapped_column(String(500), nullable=False) # Хеш пароля
-
-    # sault + password | use SHA1, SHA512
 
     role_id: Mapped[int] = mapped_column(ForeignKey("role.id"), nullable=False)
 
@@ -168,7 +164,7 @@ def add_test_data():
             db.add(Role(name=name))
 
         for i, values in enumerate(users, start=1):
-            db.add(User(email=values[0], sault="123", password="test_pass", role_id=values[1], firstname=values[2], lastname=values[3]))
+            db.add(User(email=values[0], password="test_pass", role_id=values[1], firstname=values[2], lastname=values[3]))
 
 
         for i, name in enumerate(products, start=1):
