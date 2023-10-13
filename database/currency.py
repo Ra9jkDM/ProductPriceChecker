@@ -15,21 +15,22 @@ def get_currencies():
 
     return result
 
-def get_price(date, currency_code="USD"):
-    price = -1
+def get(date, currency_code="USD"):
+    result = {"code": currency_code, "name": None, "price": -1}
     date = date_controller.date_to_str(date)
 
     try:
         with Session(autoflush=True, bind=ENGINE) as db:
-            currency_id = db.query(Currency).filter(Currency.code == currency_code).first().id
-            exchange_rate = db.query(ExchangeRates).filter(ExchangeRates.date == date, ExchangeRates.currency_id == currency_id).first()
+            currency = db.query(Currency).filter(Currency.code == currency_code).first()
+            exchange_rate = db.query(ExchangeRates).filter(ExchangeRates.date == date, ExchangeRates.currency_id == currency.id).first()
 
             if isinstance(exchange_rate, ExchangeRates):
-                price = exchange_rate.price
+                result["price"] = exchange_rate.price
+                result["name"] = currency.name
     except:
         pass
 
-    return price
+    return result
 
 def save_price(date, price, currency_code="USD"):
     try:

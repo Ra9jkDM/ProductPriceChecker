@@ -1,7 +1,7 @@
 from time import sleep
 from datetime import datetime
 
-from views.proxy import dollar, currencies, get_price
+from views.proxy import currencies, get_price
 from database import currency, url, product_price
 
 CURRENCY_INTERVAL = 12*60*60

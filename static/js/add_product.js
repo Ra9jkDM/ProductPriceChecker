@@ -2,7 +2,7 @@ import { getJSON, sendJSON, sendForm } from "./modules/load_json.js";
 import { parseCookie } from "./modules/parseCookies.js";
 import { getRubPrice, getDolPrice } from "./modules/currencyConverter.js";
 
-
+const currency_name = "USD";
 let upload_data = []
 let file = null;
 
@@ -113,14 +113,14 @@ upload.onchange = function() {
 };
 
 
-// ToDo change /proxy/dollar to /proxy/currency&code=USD
+
 let check = document.getElementById("test");
 check.onclick = function() {
     let data = collect_data();
     sendJSON("/proxy/shops", data).then(function(e) {
         console.log(e);
         upload_data = e;
-        getJSON("/proxy/dollar").then(function(d) {
+        getJSON("/proxy/currencies?code="+currency_name).then(function(d) {
             console.log(d);
             let table = document.getElementById("shops-table");
             table.innerHTML = "";

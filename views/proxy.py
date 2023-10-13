@@ -21,12 +21,14 @@ def shops():
     return json_response
 
 @proxy.route("/currencies")
-@login_required
-def currencies(code):
-    # code = request.args.get("code") #ToDo -> API [localhost:3000/proxy/currency&code=USD]
+# @login_required
+def get_currency():
+    code = request.args.get("code")
+    return currencies(code)
 
+def currencies(code):
     now = datetime.now()
-    item = {"price": currency.get_price(now, code)}
+    item = currency.get(now, code)
 
     if item["price"] == -1:
         req = requests.get(f"{API_URL}/currency?codes={code}")
@@ -36,10 +38,6 @@ def currencies(code):
 
     return item
 
-@proxy.route("/dollar") # <- ToDo delete this 
-@login_required
-def dollar():
-    return currencies("USD")
 
 def get_price(urls):
     resp = requests.post(API_URL+"/shops/get", json={"shops": urls})
