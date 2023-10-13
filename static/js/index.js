@@ -1,11 +1,47 @@
+import {sortProductPrices, sortProductsByASC, sortProductsByDESC, sortProductsByPriceASC, sortProductsByPriceDESC} from "./modules/sorts.js"
 import {getRubPrice, getDolPriceNumber, getDolPrice} from "./modules/currencyConverter.js";
 import {getJSON} from "./modules/load_json.js"
 
+const currency_name = "USD";
+const products = document.getElementById("products");
+
+let json_data = "";
+products.innerHTML = "";
+
+getJSON("/api/products").then(function(data) {
+    json_data = data;
+
+    sortProductsByASC(json_data.products);
+
+    let all = createAllProducts(json_data);
+    appendChildren(products, all);
+})
+
+function createAllProducts(json) {
+    let blocks = []
+
+    let currency = json.currencies.find(function (e) {
+        if(e.code == currency_name) {
+            return true;
+        }
+        return false
+    });
+    
+    for(const product of json.products) {
+        let min_price = product.prices[0].price;
+
+        blocks.push(createProductBlock(product.product_id, product.name, 
+                                        product.image, getRubPrice(min_price),
+                                        getDolPrice(min_price, currency.price)));
+    }
+    return blocks;
+}
+
 
 function createProductBlock(id, name, image, price_rub, price_dol) {
-    const product = document.createElement("div");
+    const product = document.createElement("a");
     product.setAttribute("class", "product");
-    product.setAttribute("onclick", "location.href='/product?id="+ id +"'");
+    product.href = "/product?id="+ id;
 
     const img = document.createElement("img");
     img.setAttribute("class", "image");
@@ -36,115 +72,13 @@ function createProductBlock(id, name, image, price_rub, price_dol) {
     return product
 }
 
-function _isDollar(currency) {
-    return currency.name === "Доллар";
-}
-
-function _sortProductsByASC(products){
-    return products.sort(function(a, b) {
-        if (a.name > b.name) {
-            return 1;
-        } else if (a.name < b.name) {
-            return -1;
-        }
-        return 0;
-    })
-}
-function _sortProductsByDESC(products){
-    return products.sort(function(a, b) {
-        if (a.name < b.name) {
-            return 1;
-        } else if (a.name > b.name) {
-            return -1;
-        }
-        return 0;
-    })
-}
-
-function _sortProductsByPriceASC(products){
-    return products.sort(function(a, b) {
-        a = a.prices[0].price;
-        b = b.prices[0].price;
-
-        if (a > b) {
-            return 1;
-        } else if (a < b) {
-            return -1;
-        }
-        return 0;
-    })
-}
-
-function _sortProductsByPriceDESC(products){
-    return products.sort(function(a, b) {
-        a = a.prices[0].price;
-        b = b.prices[0].price;
-
-        if (a < b) {
-            return 1;
-        } else if (a > b) {
-            return -1;
-        }
-        return 0;
-    })
-}
-
-function _sortProductPrices(products) {
-    for(const product of products) {
-        product.prices.sort(function(a, b) {
-            if (a.price > b.price) {
-                return 1;
-            } else if (a.price < b.price) {
-                return -1;
-            }
-            return 0;
-        });
-    }
-}
-
-function createAllProducts(json) {
-    let blocks = []
-
-    let currency = json.currencies.find(_isDollar);
-    
-    for(const product of json.products) {
-        let min_price = product.prices[0].price;
-
-        blocks.push(createProductBlock(product.product_id, product.name, 
-                                        product.image, getRubPrice(min_price),
-                                        getDolPrice(min_price, currency.price)));
-    }
-    return blocks;
-}
-
-
-
+ 
 function appendChildren(parent, children) {
     for (const child of children) {
         parent.appendChild(child);
     }
 }
 
-
-
-
-
-let products = document.getElementById("products");
-
-let json = getJSON("/api/products")
-let json_data = "";
-products.innerHTML = "";
-
-
-json.then(function(data) {
-    json_data = data;
-
-    _sortProductPrices(json_data.products);
-    _sortProductsByASC(json_data.products);
-
-    let all = createAllProducts(json_data);
-    appendChildren(products, all);
-})
 
 document.getElementById("sort").onchange = function(e) {
     let value = e.target.value;
@@ -153,16 +87,16 @@ document.getElementById("sort").onchange = function(e) {
 
     switch(value) {
         case "nameASC":
-            _sortProductsByASC(json_data.products);
+            sortProductsByASC(json_data.products);
             break;
         case "nameDESC":
-            _sortProductsByDESC(json_data.products);
+            sortProductsByDESC(json_data.products);
             break;
         case "priceASC":
-            _sortProductsByPriceASC(json_data.products);
+            sortProductsByPriceASC(json_data.products);
             break;
         default:
-            _sortProductsByPriceDESC(json_data.products);
+            sortProductsByPriceDESC(json_data.products);
             break;
     }
 

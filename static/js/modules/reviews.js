@@ -9,7 +9,6 @@ const is_admin = (document.getElementById("is_admin").innerText == "True");
 const text = document.getElementById("new-review");
 const base_reviews = document.getElementById("reviews");
 
-console.log(is_admin,);
 
 export function createReviews(reviews){
     for(let i=0; i < reviews.length; i++) {

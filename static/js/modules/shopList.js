@@ -1,20 +1,10 @@
 import {getRubPrice, getDolPriceNumber, getDolPrice} from "./currencyConverter.js";
+import {sortShopsByPriceDESC} from "./sorts.js";
 
 export function createShopList(input, len){
     const shops = document.getElementById('shops');
 
-    // let data =  input.datasets;
-    let urls = input.urls.sort(function(a, b) {
-        a = a.price;
-        b = b.price;
-
-        if (a > b) {
-            return 1;
-        } else if (a < b) {
-            return -1;
-        }
-        return 0;
-    });
+    let urls = input.urls.sort(sortShopsByPriceDESC);
 
     for(const shop_info of urls){
         const shop = document.createElement("div");

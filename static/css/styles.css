@@ -92,18 +92,33 @@
   margin-top: 45px;
   height: 36px;
 }
-.info .name {
-  position: absolute;
+.info div {
+  display: inline-block;
+  text-align: left;
+  left: 0;
+}
+.info div .name {
+  display: inline-block;
   font-size: 30px;
-  max-width: 60%;
   overflow: auto;
   text-overflow: ellipsis;
+  max-width: 50vw;
   height: 36px;
+}
+.info div img {
+  display: inline-block;
+  width: 36px;
+  padding-left: 5px;
 }
 .info div .price {
   display: inline-block;
   font-size: 30px;
   padding-left: 10px;
+}
+
+#url {
+  display: block;
+  margin-top: 10px;
 }
 
 .product-image {
@@ -150,7 +165,7 @@
   padding: 5px;
   width: 200px;
 }
-#changePrice #rub {
+#changePrice .active-button {
   background-color: wheat;
 }
 

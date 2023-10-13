@@ -7,6 +7,8 @@
   <script defer type="module" src="{{ url_for('static', filename='js/modules/drawChart.js') }}"></script>
   <script defer type="module" src="{{ url_for('static', filename='js/modules/reviews.js') }}"></script>
   <script defer type="module" src="{{ url_for('static', filename='js/modules/load_json.js') }}"></script>
+  <script defer type="module" src="{{ url_for('static', filename='js/modules/sorts.js') }}"></script>
+
   <script defer type="module" src="{{ url_for('static', filename='js/modules/parseCookies.js') }}"></script>
 
   <script defer type="module" src="{{ url_for('static', filename='js/product.js') }}"></script>
@@ -18,7 +20,17 @@
 <div id="is_admin" style="display: none;">{{ current_user|is_admin }}</div>
 
     <div class="info">
-        <div class="name left" id="name"></div>
+      <div class="left">
+        <div class="name" id="name"></div>
+        {% if current_user|is_admin %}
+          <a href="/api/edit_product?id={{ id }}">
+            <img src="/img/edit.png"/>
+          </a>
+          <a href="/api/delete_product?id={{ id }}">
+            <img src="/img/trash.png"/>
+          </a>
+        {% endif %}
+      </div>
         
         <div class="right">
             <div class="price" id="price-rub">2799  ₽</div>
@@ -27,16 +39,17 @@
     </div>
 
 
-        
-    <img id="img" class="product-image left"/>
-        
+    <div id="url">
+      <img id="img" class="product-image left"/>
+          
 
-    <div id="shops">
+      <div id="shops">
 
+      </div>
     </div>
 
     <div id="changePrice">
-        <div id="rub">Цены в рублях</div>
+        <div id="rub" class="active-button">Цены в рублях</div>
         <div id="dol">Цены в долларах</div>
     </div>
     <div class="chart">

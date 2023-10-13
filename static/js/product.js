@@ -2,25 +2,38 @@ import { drawChart } from "./modules/drawChart.js";
 import {getRubPrice, getDolPriceNumber, getDolPrice} from "./modules/currencyConverter.js";
 import { createShopList } from "./modules/shopList.js";
 import { createReviews, createNewReview } from "./modules/reviews.js";
-import {getJSON} from "./modules/load_json.js"
+import {getJSON} from "./modules/load_json.js";
+import {sortDatasetsByLengthASC} from "./modules/sorts.js";
 // import { parseCookie } from "./modules/parseCookies.js";
 
 
-const active_color = 'wheat';
-const base_color = 'white';
 
+const id = document.getElementById("id").innerHTML;
+const is_admin = (document.getElementById("is_admin").innerText == "True");
 
-function sortByASC(input){
-    return input.sort(function(a, b) {
-        let len = a.data.length - 1;
-        if (a.data[len] > b.data[len]) {
-            return 1;
-        } else if (a.data[len] < b.data[len]) {
-            return -1;
-        }
-        return 0;
-    });
-}
+getJSON("/api/product?id="+ id).then(function(input) {
+    input.datasets = sortDatasetsByLengthASC(input.datasets);
+    const data_len = input.datasets[0].data.length - 1;
+
+    let dollar_price = _getDollarPrice(input);
+
+    drawChart(input, 'rub-chart');
+    drawChart(dollar_price, 'dol-chart');
+
+    setName(input.name);
+    setMainPrice(input, data_len);
+    setDescription(input.description);
+    setImage(input.image);
+
+    createShopList(input, data_len);
+
+    console.log(input.reviews)
+    createReviews(input.reviews);
+
+    createListeners();
+
+})
+
 
 function setMainPrice(input, len) {
     const rub = document.getElementById("price-rub");
@@ -64,11 +77,11 @@ function _change(num){
     const el1 = document.getElementById("dol");
 
     if(num > 0) {
-        el.style.backgroundColor = active_color;
-        el1.style.backgroundColor = base_color;
+        el.setAttribute("class", "active-button");
+        el1.setAttribute("class", "");
     } else {
-        el1.style.backgroundColor = active_color;
-        el.style.backgroundColor = base_color;
+        el1.setAttribute("class", "active-button");
+        el.setAttribute("class", "");
     }
 }
 
@@ -97,36 +110,6 @@ function setImage(img) {
     document.getElementById("img").src = img;
 }
 
-function getID() {
-    let id = document.getElementById("id").innerHTML;
-    return id;
-}
 
-let id = getID();
-
-let json = getJSON("/api/product?id="+ id);
-
-json.then(function(input) {
-    input.datasets = sortByASC(input.datasets);
-    const data_len = input.datasets[0].data.length - 1;
-
-    let dollar_price = _getDollarPrice(input);
-
-    drawChart(input, 'rub-chart');
-    drawChart(dollar_price, 'dol-chart');
-
-    setName(input.name);
-    setMainPrice(input, data_len);
-    setDescription(input.description);
-    setImage(input.image);
-
-    createShopList(input, data_len);
-
-    console.log(input.reviews)
-    createReviews(input.reviews);
-
-    createListeners();
-
-})
 
 

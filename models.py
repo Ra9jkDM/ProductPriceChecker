@@ -37,8 +37,8 @@ class Product(Base):
     description: Mapped[String] = mapped_column(String(2000), nullable=True)
     image: Mapped[String] = mapped_column(String(1000), nullable=True)
 
-    urls: Mapped[List["Url"]] = relationship()
-    comments: Mapped[List["Comment"]] = relationship()
+    urls: Mapped[List["Url"]] = relationship("Url", back_populates="product", cascade="all, delete", passive_deletes=True)
+    comments: Mapped[List["Comment"]] = relationship("Comment", back_populates="product", cascade="all, delete", passive_deletes=True)
 
 class Shop(Base):
     __tablename__ = "shop"
@@ -46,7 +46,7 @@ class Shop(Base):
     id:Mapped[int] = mapped_column(Integer, primary_key=True, unique=True)
     name:Mapped[String] = mapped_column(String(100), unique=True, nullable=False)
 
-    urls: Mapped[List["Url"]] = relationship()
+    urls: Mapped[List["Url"]] = relationship("Url", back_populates="shop", cascade="all, delete", passive_deletes=True)
 
 class Url(Base):
     __tablename__ = "url"
@@ -58,9 +58,9 @@ class Url(Base):
 
     url: Mapped[String] = mapped_column(String(500), nullable=False)
 
-    product: Mapped[List["Product"]] = relationship('Product', backref=backref('url', passive_deletes=True))
-    shop: Mapped[List["Shop"]] = relationship('Shop', backref=backref('url', passive_deletes=True))
-    prices: Mapped[List["ProductPrice"]] = relationship()
+    product: Mapped[List["Product"]] = relationship('Product', back_populates="urls")
+    shop: Mapped[List["Shop"]] = relationship('Shop', back_populates="urls")
+    prices: Mapped[List["ProductPrice"]] = relationship("ProductPrice", back_populates="url", cascade="all, delete", passive_deletes=True)
 
 
 class ProductPrice(Base):
@@ -71,7 +71,7 @@ class ProductPrice(Base):
 
     price:Mapped[int] = mapped_column(Integer)
 
-    url: Mapped[List["Url"]] = relationship('Url', backref=backref('product_price', passive_deletes=True))
+    url: Mapped[List["Url"]] = relationship('Url', back_populates="prices")
 
 
 class Role(Base):
@@ -109,8 +109,8 @@ class Comment(Base):
     comment: Mapped[String] = mapped_column(String(1500), nullable=False)
     stars: Mapped[int] = mapped_column(Integer, nullable=False)
 
-    product: Mapped["Product"] = relationship('Product', backref=backref('comment', passive_deletes=True))
-    user: Mapped["User"] = relationship('User', backref=backref('comment', passive_deletes=True))
+    product: Mapped["Product"] = relationship('Product', back_populates="comments")
+    user: Mapped["User"] = relationship('User', back_populates="comments")
 
 
 class Currency(Base):
@@ -120,7 +120,7 @@ class Currency(Base):
     name: Mapped[String] = mapped_column(String(100), unique=True, nullable=False)
     code: Mapped[String] = mapped_column(String(5), unique=True, nullable=False)
 
-    exchange_rates: Mapped[List["ExchangeRates"]] = relationship()
+    exchange_rates: Mapped[List["ExchangeRates"]] = relationship("ExchangeRates", back_populates="currency", cascade="all, delete", passive_deletes=True)
 
 class ExchangeRates(Base):
     __tablename__ = "exchange_rate"
@@ -129,7 +129,7 @@ class ExchangeRates(Base):
     currency_id: Mapped[int] = mapped_column(ForeignKey("currency.id", ondelete="CASCADE"), primary_key=True)
     price: Mapped[float] = mapped_column(Float, nullable=False)
 
-    currencies: Mapped["Currency"] = relationship('Currency', backref=backref('exchange_rate', passive_deletes=True))
+    currency: Mapped["Currency"] = relationship('Currency', back_populates="exchange_rates")
 
 
 

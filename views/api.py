@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, redirect, url_for 
 from flask_login import login_required, current_user
 import json
 
@@ -40,6 +40,16 @@ def _get_json_data(bytes_data):
         json_data += i
     
     return json_data
+
+@api.route("/delete_product")
+# @login_required
+# @is_admin
+def delete_product():
+    id = request.args.get("id")
+    print(id)
+    product.delete_product(id)
+    return redirect(url_for("view.index"))
+
 
 @api.route("/add_comment", methods=["POST"])
 @login_required

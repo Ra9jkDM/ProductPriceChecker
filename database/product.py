@@ -20,7 +20,7 @@ def _get_currency(currencies):
     
     for i in currencies:
         prices = sorted(i.exchange_rates, key=lambda x: x.date, reverse=True)
-        result.append({"name": i.name, "price": prices[0].price})
+        result.append({"code": i.code, "name": i.name, "price": prices[0].price})
 
     return result
 
@@ -171,4 +171,10 @@ def save_product(data, file):
     
     return result
         
-        
+
+def delete_product(id):
+    with Session( bind=ENGINE) as db:
+        product = db.query(Product).filter_by(id=id).first()
+        db.delete(product)
+        db.flush()
+        db.commit()
