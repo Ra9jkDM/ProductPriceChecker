@@ -172,9 +172,49 @@ def save_product(data, file):
     return result
         
 
+def edit_product(data, file):
+    result = {"status": "ok"}
+
+    with Session(autoflush=True, bind=ENGINE) as db:
+        product = db.query(Product).filter_by(id=int(data["id"])).first()
+
+        product.name = data["name"]
+        product.description = data["description"]
+
+        # Save image
+        image_name = _save_image(file, product.id)
+        product.image = image_name
+        db.commit()
+
+        # Save url
+        for i in data["urls"]:
+            shop_id = db.query(Shop).filter(Shop.name == i["name"]).first().id
+
+            url = db.query(Url).filter_by(product_id=product.id, shop_id=shop_id).first()
+
+            if isinstance(url, Url):
+                url.url = i["url"]
+            else:
+                url = Url(product_id=product.id, shop_id=shop_id, url=i["url"])
+                db.add(url)
+
+            db.commit()
+
+            now = date_controller.get_now()
+            price = db.query(ProductPrice).filter_by(url_id=url.id, date=now).first()
+
+            if isinstance(price, ProductPrice):
+                price = i["price"]
+            else:
+                db.add(ProductPrice(url_id=url.id, date=now, price=i["price"]))
+
+            db.commit()
+
+        return result
+            
+
 def delete_product(id):
     with Session( bind=ENGINE) as db:
         product = db.query(Product).filter_by(id=id).first()
         db.delete(product)
-        db.flush()
         db.commit()

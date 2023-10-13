@@ -23,7 +23,7 @@
       <div class="left">
         <div class="name" id="name"></div>
         {% if current_user|is_admin %}
-          <a href="/api/edit_product?id={{ id }}">
+          <a href="/edit_product?id={{ id }}">
             <img src="/img/edit.png"/>
           </a>
           <a href="/api/delete_product?id={{ id }}">

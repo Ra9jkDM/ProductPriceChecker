@@ -30,7 +30,11 @@ def add_product_post():
     else:
         return {"status": "error"}
 
-    result = product.save_product(json_data, file)
+
+    if json_data["id"] == "-1":
+        result = product.save_product(json_data, file)
+    else:
+        result = product.edit_product(json_data, file)
         
     return result
 
@@ -42,8 +46,8 @@ def _get_json_data(bytes_data):
     return json_data
 
 @api.route("/delete_product")
-# @login_required
-# @is_admin
+@login_required
+@is_admin
 def delete_product():
     id = request.args.get("id")
     print(id)

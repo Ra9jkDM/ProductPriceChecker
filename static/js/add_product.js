@@ -6,6 +6,47 @@ import { getRubPrice, getDolPrice } from "./modules/currencyConverter.js";
 let upload_data = []
 let file = null;
 
+const is_edit = document.getElementById("id").innerHTML;
+
+const img = document.getElementById("img");
+const name = document.getElementById("name");
+const description = document.getElementById("description");
+
+console.log(is_edit);
+if (is_edit != -1) {
+    console.log("Edit");
+
+    getJSON("/api/product?id="+ is_edit).then(function(input) {
+        console.log(input);
+
+        // Upload img
+        img.src = input.image;
+        fetch(input.image)
+        .then(res => res.blob())
+        .then(blob => {
+            let upload_img = new File([blob], _get_image_name(input.image))
+                console.log(upload_img);
+                file = upload_img;
+            });
+
+        name.value = input.name;
+        description.value = input.description;
+
+        for (let i=0; i<input.urls.length; i++) {
+            let url = input.urls[i];
+            document.querySelector('input[alt="'+url.name+'"]').value = url.url;
+            // document.querySelector('input[alt="Citilink"]')
+        }
+        
+    });
+
+}
+
+function _get_image_name(path) {
+    return path.split('/').slice(-1);
+}
+
+
 function collect_data() {
     let urls = document.getElementsByClassName("url");
     let shops = []
@@ -15,8 +56,8 @@ function collect_data() {
     }
     
     let data = {
-        "name": document.getElementById("name").value,
-        "description": document.getElementById("description").value,
+        "name": name.value,
+        "description": description.value,
         "urls": shops
     };
 
@@ -61,7 +102,6 @@ function createRow(shop, name, price, dollar) {
 let upload = document.getElementById("upload");
 upload.onchange = function() {
     if (this.files && this.files[0]) {
-        let img = document.getElementById("img");
 
         img.onload = () => {
             URL.revokeObjectURL(img.src)
@@ -72,10 +112,11 @@ upload.onchange = function() {
     }
 };
 
+
+// ToDo change /proxy/dollar to /proxy/currency&code=USD
 let check = document.getElementById("test");
 check.onclick = function() {
     let data = collect_data();
-    let token = "123";//parseCookie(document.cookie)["csrftoken"]
     sendJSON("/proxy/shops", data).then(function(e) {
         console.log(e);
         upload_data = e;
@@ -101,7 +142,6 @@ let save = document.getElementById("save");
 save.onclick = function() {
     console.log("Save");
     let data = collect_data();
-    let token = "123";//parseCookie(document.cookie)["csrftoken"]
 
     let prices = []
 
@@ -115,7 +155,7 @@ save.onclick = function() {
         }
     }
     
-    let json = {"name": data.name, "description": data.description,
+    let json = {"id": is_edit, "name": data.name, "description": data.description,
                  "urls": prices, "image": file};
     console.log(json);
 

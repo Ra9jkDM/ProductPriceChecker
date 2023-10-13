@@ -29,5 +29,12 @@ def product():
 @is_admin
 def add_product():
     data = shop.get_shops()
-    return render_template("add_product.html", name=user.get_name(), shops=data)
+    return render_template("add_product.html", name=user.get_name(), shops=data, id=-1)
 
+@view.route("/edit_product")
+@login_required
+@is_admin
+def edit_product():
+    id = request.args.get("id")
+    data = shop.get_shops()
+    return render_template("add_product.html", name=user.get_name(), shops=data, id=id)
