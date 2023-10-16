@@ -11,9 +11,9 @@ itsdangerous==2.1.2
 Jinja2==3.1.2
 MarkupSafe==2.1.3
 minio==7.1.17
-psycopg2==2.9.9
+psycopg2-binary==2.9.9
 requests==2.31.0
 SQLAlchemy==2.0.21
 typing_extensions==4.8.0
 urllib3==2.0.6
-Werkzeug==2.3.7 # Important
+# Werkzeug==2.3.7 # Important

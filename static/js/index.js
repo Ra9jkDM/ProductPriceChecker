@@ -11,6 +11,7 @@ products.innerHTML = "";
 getJSON("/api/products").then(function(data) {
     json_data = data;
 
+    sortProductPrices(json_data.products);
     sortProductsByASC(json_data.products);
 
     let all = createAllProducts(json_data);

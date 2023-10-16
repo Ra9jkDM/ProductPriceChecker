@@ -1,10 +1,10 @@
 from flask import Flask
 from flask_login import LoginManager
-from os import environ
+from os import environ, path
 
 from sqlalchemy.orm import Session
 
-from models import ENGINE, User
+from models import ENGINE, User, main
 
 from jinja_functions import register_jinja_functions
 
@@ -17,6 +17,13 @@ def create_app():
     app = Flask(__name__)
 
     app.config["SECRET_KEY"] = environ.get("SECRET_KEY")
+
+    # db_init_file = "db_init"
+    # if not path.exists(db_init_file):
+    #     main() # Init bd
+    #     with open(db_init_file) as f:
+    #         f.write("DB init")
+        
 
     register_login_manager(app)
     urls.register_blueprints(app)

@@ -9,8 +9,11 @@ class Roles(Enum):
 
 
 def get_role(role):
-    with Session(autoflush=True, bind=ENGINE) as db:
-        return db.query(Role).filter_by(name=role.value).first()
+    try:
+        with Session(autoflush=True, bind=ENGINE) as db:
+            return db.query(Role).filter_by(name=role.value).first()
+    except:
+        pass
 
 def is_admin(user):
     if isinstance(user, User):

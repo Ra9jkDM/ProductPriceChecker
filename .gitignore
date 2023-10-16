@@ -7,3 +7,7 @@ static/css/styles.css.map
 
 
 **/__pycache__
+
+docker-compose.yml
+Dockerfile
+docker/

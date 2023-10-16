@@ -225,11 +225,13 @@ def selection_of_db():
             print("\n\n")
 
 
-
-if __name__ == "__main__":
+def main():
     Base.metadata.create_all(bind=ENGINE)
 
     add_test_data()
     selection_of_db()
 
+if __name__ == "__main__":
+    main()
+    
 # python models.py

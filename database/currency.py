@@ -7,12 +7,14 @@ from database.modules import date_controller
 
 def get_currencies():
     result = []
-    with Session(autoflush=True, bind=ENGINE) as db:
-        currensies = db.query(Currency).all()
+    try:
+        with Session(autoflush=True, bind=ENGINE) as db:
+            currensies = db.query(Currency).all()
 
-        for i in currensies:
-            result.append({"id": i.id,"name": i.name, "code": i.code})
-
+            for i in currensies:
+                result.append({"id": i.id,"name": i.name, "code": i.code})
+    except:
+        pass
     return result
 
 def get(date, currency_code="USD"):

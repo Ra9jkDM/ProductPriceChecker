@@ -65,7 +65,7 @@ def _fill_urls_prices_labels(product):
         urls.append({"name": i.shop.name, "url": i.url, "price": i.prices[-1].price})
 
         price = []
-        for j in i.prices:
+        for j in sorted(i.prices, key=lambda x: x.date):
             price.append(j.price)
 
             if not isFilled:
@@ -175,46 +175,51 @@ def save_product(data, file):
 def edit_product(data, file):
     result = {"status": "ok"}
 
-    with Session(autoflush=True, bind=ENGINE) as db:
-        product = db.query(Product).filter_by(id=int(data["id"])).first()
+    try:
+        with Session(autoflush=True, bind=ENGINE) as db:
+            product = db.query(Product).filter_by(id=int(data["id"])).first()
 
-        product.name = data["name"]
-        product.description = data["description"]
+            product.name = data["name"]
+            product.description = data["description"]
 
-        # Save image
-        image_name = _save_image(file, product.id)
-        product.image = image_name
-        db.commit()
-
-        # Save url
-        for i in data["urls"]:
-            shop_id = db.query(Shop).filter(Shop.name == i["name"]).first().id
-
-            url = db.query(Url).filter_by(product_id=product.id, shop_id=shop_id).first()
-
-            if isinstance(url, Url):
-                url.url = i["url"]
-            else:
-                url = Url(product_id=product.id, shop_id=shop_id, url=i["url"])
-                db.add(url)
-
+            # Save image
+            image_name = _save_image(file, product.id)
+            product.image = image_name
             db.commit()
 
-            now = date_controller.get_now()
-            price = db.query(ProductPrice).filter_by(url_id=url.id, date=now).first()
+            # Save url
+            for i in data["urls"]:
+                shop_id = db.query(Shop).filter(Shop.name == i["name"]).first().id
 
-            if isinstance(price, ProductPrice):
-                price = i["price"]
-            else:
-                db.add(ProductPrice(url_id=url.id, date=now, price=i["price"]))
+                url = db.query(Url).filter_by(product_id=product.id, shop_id=shop_id).first()
 
-            db.commit()
+                if isinstance(url, Url):
+                    url.url = i["url"]
+                else:
+                    url = Url(product_id=product.id, shop_id=shop_id, url=i["url"])
+                    db.add(url)
 
-        return result
+                db.commit()
+
+                now = date_controller.get_now()
+                price = db.query(ProductPrice).filter_by(url_id=url.id, date=now).first()
+
+                if isinstance(price, ProductPrice):
+                    price = i["price"]
+                else:
+                    db.add(ProductPrice(url_id=url.id, date=now, price=i["price"]))
+
+                db.commit()
+    except:
+        pass
+    return result
             
 
 def delete_product(id):
-    with Session( bind=ENGINE) as db:
-        product = db.query(Product).filter_by(id=id).first()
-        db.delete(product)
-        db.commit()
+    try:
+        with Session( bind=ENGINE) as db:
+            product = db.query(Product).filter_by(id=id).first()
+            db.delete(product)
+            db.commit()
+    except:
+        pass
