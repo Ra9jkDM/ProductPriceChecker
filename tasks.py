@@ -6,8 +6,10 @@ from database import currency, url, product_price
 
 CURRENCY_INTERVAL = 12*60*60
 PRODUCT_INTERVAL = 24*60*60
+INIT_API_TIME = 5*60
 
 def update_currency_thread():
+    sleep(INIT_API_TIME)
     while True:
         update_currency()     
         sleep(CURRENCY_INTERVAL)
@@ -20,6 +22,7 @@ def update_product_price_thread():
 
 
 def update_currency():
+    sleep(INIT_API_TIME)
     print("Update currencies")
     items = currency.get_currencies()
     print(items)

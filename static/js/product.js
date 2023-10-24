@@ -20,12 +20,15 @@ getJSON("/api/product?id="+ id).then(function(input) {
     drawChart(input, 'rub-chart');
     drawChart(dollar_price, 'dol-chart');
 
+    //input.urls =
+     createShopList(input, data_len);
     setName(input.name);
+    console.log(input);
     setMainPrice(input, data_len);
     setDescription(input.description);
     setImage(input.image);
 
-    createShopList(input, data_len);
+    
 
     console.log(input.reviews)
     createReviews(input.reviews);
@@ -39,7 +42,7 @@ function setMainPrice(input, len) {
     const rub = document.getElementById("price-rub");
     const dol = document.getElementById("price-dol");
 
-    let price = input.datasets[0].data[len];
+    let price = input.urls[0].price;
     
     rub.textContent=getRubPrice(price);
     dol.textContent=getDolPrice(price, input.dollar[len]);

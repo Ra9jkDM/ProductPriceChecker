@@ -4,7 +4,9 @@ import {sortShopsByPriceDESC} from "./sorts.js";
 export function createShopList(input, len){
     const shops = document.getElementById('shops');
 
+    console.log(input.urls);
     let urls = input.urls.sort(sortShopsByPriceDESC);
+    console.log(urls);
 
     for(const shop_info of urls){
         const shop = document.createElement("div");
@@ -33,6 +35,8 @@ export function createShopList(input, len){
         shop.appendChild(prices);
 
         shops.appendChild(shop);
+
     }
+    return urls;
 }
 
