@@ -1,13 +1,5 @@
 /* reload */
 /* sass -w sass/styles.scss css/styles.css */
-/* @font-face {
-  font-family: Apple;
-  src: url(/fonts/SFProDisplay-Ultralight.woff);
-}
-@font-face {
-  font-family: Apple-mono;
-  src: url(/fonts/sf-mono-regular.otf);
-} */
 #slider {
   margin-top: 45px;
 }
@@ -166,7 +158,7 @@
   width: 200px;
 }
 #changePrice .active-button {
-  background-color: wheat;
+  background-color: rgba(110, 187, 53, 0.54);
 }
 
 .chart #rub-chart {
@@ -409,7 +401,7 @@ footer {
   margin-left: -15px;
   bottom: 0px;
   padding: 10px 0px;
-  background-color: rgb(255, 203, 135);
+  background-color: rgba(110, 187, 53, 0.54);
   border-radius: 10px;
 }
 
