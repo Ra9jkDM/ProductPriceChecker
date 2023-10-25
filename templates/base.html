@@ -5,13 +5,24 @@
         <title>Save Money</title>
 
 
-        <link rel="icon" type="image/x-icon" href="/img/favicon.png"/>
+        <link rel="icon" type="image/x-icon" href="{{ url_for('files.images', name='favicon.png') }}"/>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 
+        <style>
+            @font-face {
+                font-family: Apple;
+                src: url("{{ url_for('files.fonts', name='SFProDisplay-Ultralight.woff') }}");
+            }
+            @font-face {
+                font-family: Apple-mono;
+                src: url("{{ url_for('files.fonts', name='sf-mono-regular.otf') }}");
+            }
+        </style>
         {% block js %}
         {% endblock %}
     </head>
     <body>
+        {% include "blocks/info.html" %}
         <div class="center">
             {% include "blocks/menu.html" %}
         

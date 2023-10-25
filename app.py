@@ -1,23 +1,30 @@
 from flask import Flask
 from flask_login import LoginManager
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
+from werkzeug.wrappers import Response
 from os import environ, path
 
 from sqlalchemy.orm import Session
-
 from models import ENGINE, User, main
 
-from jinja_functions import register_jinja_functions
-
+import jinja
 from tasks import update_currency_thread, update_product_price_thread
 
 import urls
 from threading import Thread
+
+
+PREFIX = environ.get("flask_prefix")
 
 def create_app():
     app = Flask(__name__)
 
     app.config["SECRET_KEY"] = environ.get("SECRET_KEY")
 
+    # Jinja2 settings
+    jinja.setup(app, prefix=PREFIX)
+
+    # ToDo make first initialization tables in DB
     # db_init_file = "db_init"
     # if not path.exists(db_init_file):
     #     main() # Init bd
@@ -27,8 +34,8 @@ def create_app():
 
     register_login_manager(app)
     urls.register_blueprints(app)
-    register_jinja_functions()
 
+    # ToDo uncomment this ->
     # create_scheduled_tasks()
 
     return app
@@ -59,4 +66,8 @@ if __name__ == "__main__":
     # gen_secret_key()
     
     app = create_app()
+    app.wsgi_app = DispatcherMiddleware(
+                        Response('Not Found', status=404),
+                                {PREFIX: app.wsgi_app}
+                    )
     app.run(host="localhost", port=4500, debug=True)

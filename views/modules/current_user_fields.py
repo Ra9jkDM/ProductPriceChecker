@@ -23,3 +23,5 @@ def get_id():
 @is_not_null
 def get_user_id():
     return current_user.id
+
+# ToDo Delete this file !!!

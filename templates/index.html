@@ -13,12 +13,13 @@
     <div id="slider">
         <div class="slideshow-container">
             {% for i in range(3)%}
-            <!-- Full-width images with number and caption text -->
-            <div class="mySlides fade">
-            <div class="numbertext">{{ i+1 }} / 3</div>
-            <img src="/img/slide_{{ i+1 }}.jpg" style="width:100%">
-            <!-- <div class="text">Caption Text</div> -->
-            </div>
+                {% set id = (i+1)|string %}
+                <!-- Full-width images with number and caption text -->
+                <div class="mySlides fade">
+                <div class="numbertext">{{ id }} / 3</div>
+                <img src="{{ url_for('files.images', name='slide_'+ id +'.jpg') }}" style="width:100%">
+                <!-- <div class="text">Caption Text</div> -->
+                </div>
             {% endfor %} 
         </div>
         <br>

@@ -7,6 +7,7 @@ ENV = ".env"
 settings = {
     "flask": {
         "SECRET_KEY": "",
+        "prefix": "",
     },
     "api": {
         "url": "http://127.0.0.1:3000",

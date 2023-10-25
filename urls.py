@@ -1,5 +1,5 @@
 from views import view, files, users, api, proxy
-
+from os import environ
 
 def register_blueprints(app):
     app.register_blueprint(view.view)
