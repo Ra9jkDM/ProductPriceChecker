@@ -1,6 +1,11 @@
 import {sortProductPrices, sortProductsByASC, sortProductsByDESC, sortProductsByPriceASC, sortProductsByPriceDESC} from "./modules/sorts.js"
 import {getRubPrice, getDolPriceNumber, getDolPrice} from "./modules/currencyConverter.js";
-import {getJSON} from "./modules/load_json.js"
+import {getJSON} from "./modules/loadJson.js"
+import { getPath } from "./modules/configLoader.js";
+
+const product_api = getPath("/api/products");
+const product_href = getPath("/product?id=");
+const product_img = getPath("");
 
 const currency_name = "USD";
 const products = document.getElementById("products");
@@ -8,7 +13,7 @@ const products = document.getElementById("products");
 let json_data = "";
 products.innerHTML = "";
 
-getJSON("/api/products").then(function(data) {
+getJSON(product_api).then(function(data) {
     json_data = data;
 
     sortProductPrices(json_data.products);
@@ -42,11 +47,11 @@ function createAllProducts(json) {
 function createProductBlock(id, name, image, price_rub, price_dol) {
     const product = document.createElement("a");
     product.setAttribute("class", "product");
-    product.href = "/product?id="+ id;
+    product.href = product_href + id;
 
     const img = document.createElement("img");
     img.setAttribute("class", "image");
-    img.setAttribute("src", image);
+    img.setAttribute("src", product_img+image);
 
     const name_block = document.createElement("div");
     name_block.setAttribute("class", "name");

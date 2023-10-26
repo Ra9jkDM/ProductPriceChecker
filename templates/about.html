@@ -7,12 +7,20 @@
 {% block content %}
 <div class="info">О нас</div>
         
-<img id="triangle" src="/img/triangle.png"/><br>
-<img id="wheel" src="/img/wheel.png"/>
-             
-<div id="get-fact" onclick="getFact()">Узнать факты о компании!</div>
-<div id="fact">
+<img id="open-source" src="{{ url_for('files.images', name='opensource.png') }}"/>
 
-</div>
+<p>Цель данного проекта сугубо информационная. Сайт ничего не продает, 
+  но он подробно знакомит покупателей с ассортиментом, представленным на 
+  виртуальных площадках. С компанией Check Price сегодня не сотрудничает 
+  ни одна компания и интернет-магазин. Проект создавался от покупателей 
+  для покупателей без рекламмы и навязывания сомнительных предложений. 
+  В нем мы постарались продумать интерфейс и навигацию. Мы будем рады любой 
+  помощи для развития нашего проекта. У проекта полностью открыт исходный 
+  код, так что каждый может убедится, что мы не шпионим за пользователями.
+</p>
+<p>
+  <a href="https://github.com/Ra9jkDM/ProductPriceChecker">https://github.com/Ra9jkDM/ProductPriceChecker</a>
+</p>
+
 {% endblock content %}
 

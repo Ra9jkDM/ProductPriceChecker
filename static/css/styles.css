@@ -1,9 +1,6 @@
+@charset "UTF-8";
 /* reload */
 /* sass -w sass/styles.scss css/styles.css */
-#slider {
-  margin-top: 45px;
-}
-
 #products {
   margin-top: 10px;
   margin-bottom: 60px;
@@ -81,7 +78,6 @@
 
 .info {
   display: block;
-  margin-top: 45px;
   height: 36px;
 }
 .info div {
@@ -278,15 +274,11 @@ table div textarea {
   margin-bottom: 100px;
 }
 
-#triangle {
-  width: 50px;
-}
-
-#wheel {
-  /* transform: rotate(45deg); */
+#open-source {
   margin-top: 5px;
   margin-bottom: 10px;
-  width: 300px;
+  width: 50%;
+  max-width: 600px;
 }
 
 #get-fact {
@@ -309,7 +301,7 @@ table div textarea {
   border: 2px solid black;
   border-radius: 10px;
   padding: 10px;
-  margin: 50% auto;
+  margin: 25% auto;
   max-width: 350px;
 }
 .center-square-block table {
@@ -333,6 +325,85 @@ table div textarea {
   font-size: 25px;
   color: white !important;
   background-color: black;
+}
+
+.tab, .tab-inner {
+  text-align: left;
+}
+.tab .button, .tab-inner .button {
+  display: inline-block;
+  padding: 5px;
+  margin: 5px;
+}
+
+.tab-inner {
+  border: 2px solid black;
+  border-radius: 10px;
+  border: none;
+  display: block;
+  background-color: rgba(110, 187, 53, 0.54);
+}
+
+.tabcontent-inner {
+  display: none;
+  padding: 0px 12px;
+}
+.tabcontent-inner .button {
+  padding: 5px;
+  display: inline-block;
+}
+
+.scroll-table {
+  margin-top: 10px;
+}
+.scroll-table table {
+  width: 100%;
+  max-width: 921px;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+.scroll-table table .button {
+  width: 100px;
+}
+.scroll-table table thead th {
+  padding: 10px 15px;
+  border: 1px solid black;
+}
+.scroll-table table tbody tr {
+  width: 920px;
+}
+.scroll-table table tbody tr:nth-child(even) {
+  background: #f3f3f3;
+}
+.scroll-table table tbody td {
+  padding: 10px 15px;
+  font-size: 17px;
+  vertical-align: middle;
+}
+.scroll-table table tbody .ignore {
+  padding: 0;
+}
+
+.scroll-table-body {
+  height: 70vh;
+  overflow-x: auto;
+  width: 930px;
+}
+.scroll-table-body td {
+  overflow: hidden;
+}
+
+/* Стили для скролла */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 * {
@@ -392,6 +463,10 @@ body {
 .menu .item-right {
   margin-left: auto;
   order: 2;
+}
+
+.menu-indent {
+  height: 45px;
 }
 
 footer {

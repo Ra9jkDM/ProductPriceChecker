@@ -2,26 +2,28 @@ import { drawChart } from "./modules/drawChart.js";
 import {getRubPrice, getDolPriceNumber, getDolPrice} from "./modules/currencyConverter.js";
 import { createShopList } from "./modules/shopList.js";
 import { createReviews, createNewReview } from "./modules/reviews.js";
-import {getJSON} from "./modules/load_json.js";
+import {getJSON} from "./modules/loadJson.js";
 import {sortDatasetsByLengthASC} from "./modules/sorts.js";
-// import { parseCookie } from "./modules/parseCookies.js";
+import { getPath, getProductId } from "./modules/configLoader.js";
 
 
+const product_api = getPath("/api/product?id=");
+const product_img = getPath("");
+const id = getProductId();
 
-const id = document.getElementById("id").innerHTML;
-const is_admin = (document.getElementById("is_admin").innerText == "True");
 
-getJSON("/api/product?id="+ id).then(function(input) {
+getJSON(product_api + id).then(function(input) {
+    console.log(input);
     input.datasets = sortDatasetsByLengthASC(input.datasets);
     const data_len = input.datasets[0].data.length - 1;
-
+    
     let dollar_price = _getDollarPrice(input);
 
     drawChart(input, 'rub-chart');
     drawChart(dollar_price, 'dol-chart');
 
     //input.urls =
-     createShopList(input, data_len);
+    createShopList(input, data_len);
     setName(input.name);
     console.log(input);
     setMainPrice(input, data_len);
@@ -110,7 +112,7 @@ function setDescription(desc) {
 }
 
 function setImage(img) {
-    document.getElementById("img").src = img;
+    document.getElementById("img").src = product_img + img;
 }
 
 

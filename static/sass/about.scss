@@ -1,14 +1,9 @@
-$wheel-size: 300px;
 
-#triangle {
-    width: 50px;
-}
-
-#wheel {
-    /* transform: rotate(45deg); */
+#open-source {
     margin-top: 5px;
     margin-bottom: 10px;
-    width: $wheel-size;
+    width: 50%;
+    max-width: 600px;
 }
 
 #get-fact {

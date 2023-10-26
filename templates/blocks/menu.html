@@ -6,6 +6,9 @@
     <a href="{{ url_for('view.add_product') }}">
         <div class="item left">Добавить товар</div>
     </a>
+    <a href="{{ url_for('view.admin') }}">
+        <div class="item left">Администрирование</div>
+    </a>
     {% endif %}
     <a href="{{ url_for('view.about') }}">
         <div class="item left" >О нас</div> 
@@ -19,7 +22,7 @@
         </a>
         {% else %}
         <a href="{{ url_for('users.logout') }}">
-            <div class="item ">{{ name }}</div>
+            <div class="item ">{{ current_user.firstname }}</div>
         </a>
         {% endif %}
     </div>

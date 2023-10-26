@@ -27,6 +27,7 @@ $content-padding: 15px;
 @import 'add_product';
 @import 'about';
 @import 'login';
+@import 'admin';
 
 
 
@@ -95,6 +96,10 @@ body {
         margin-left: auto;
         order: 2;
     }
+}
+
+.menu-indent {
+	height: $menu-height;
 }
 
 

@@ -18,6 +18,8 @@
                 src: url("{{ url_for('files.fonts', name='sf-mono-regular.otf') }}");
             }
         </style>
+
+<script defer type="module" src="{{ url_for('static', filename='js/modules/configLoader.js') }}"></script>
         {% block js %}
         {% endblock %}
     </head>
@@ -25,11 +27,13 @@
         {% include "blocks/info.html" %}
         <div class="center">
             {% include "blocks/menu.html" %}
-        
+            <div class="menu-indent"></div>
+
             {% block content %}
 
             {% endblock content %}
 
+            <div class="menu-indent"></div>
             <footer>
                 © PriceChecker ©
             </footer>

@@ -1,10 +1,19 @@
-$main-color: white;
-$border-color: black;
+$first: rgb(110 187 53 / 54%);
+$second: black;
+$thrid: white;
+$fourht: #D6EEEE;
 
-$button-color: rgb(110 187 53 / 54%);
-$chart-color:white;
+$button-color: $first;
+$tab-header-color: $first;
+$footer-color: $first;
 
-$table-color: #D6EEEE;
+$border-color: $second;
 
-$footer-color: rgb(110 187 53 / 54%);
+$main-color: $thrid;
+$chart-color: $thrid;
+
+$table-color: $fourht;
+$table-row-color: #f3f3f3;
+
+
 

@@ -1,11 +1,14 @@
-import { getJSON, sendJSON, sendForm } from "./load_json.js";
+import { getPath, getProductId, getRole, getUserId } from "./configLoader.js";
+import { getJSON, sendJSON, sendForm } from "./loadJson.js";
 
-const image = "/img/trash.png";
-const api_url = "/api/delete_comment"
+const image = getPath("/img/trash.png");
+const api_url = getPath("/api/delete_comment");
+const api_add = getPath("/api/add_comment");
 
-const id = document.getElementById("id").innerText;
-const current_user_id = document.getElementById("user_id").innerText;
-const is_admin = (document.getElementById("is_admin").innerText == "True");
+const id = getProductId();
+const current_user_id = getUserId();
+const is_admin = getRole();
+
 const text = document.getElementById("new-review");
 const base_reviews = document.getElementById("reviews");
 
@@ -24,7 +27,7 @@ export function createNewReview() {
             "product_id":id,
             "comment": text.value,
         };
-        sendJSON("/api/add_comment", data).then(function(d) {
+        sendJSON(api_add, data).then(function(d) {
             let review = _createReview(d.id, current_user_id, d.name, data.comment);
             base_reviews.appendChild(review);
             text.value = "";

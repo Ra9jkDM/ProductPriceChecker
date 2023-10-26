@@ -1,4 +1,4 @@
-const time = 2000;
+const time = 3500;
 let slideIndex = 1;
 
 showSlides();

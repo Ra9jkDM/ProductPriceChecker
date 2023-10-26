@@ -1,12 +1,19 @@
-import { getJSON, sendJSON, sendForm } from "./modules/load_json.js";
+import { getJSON, sendJSON, sendForm } from "./modules/loadJson.js";
 import { parseCookie } from "./modules/parseCookies.js";
 import { getRubPrice, getDolPrice } from "./modules/currencyConverter.js";
+import { getPath, getProductId } from "./modules/configLoader.js";
+
+const product_api = getPath("/api/product?id=");
+const shop_api = getPath("/proxy/shops");
+const currency_api = getPath("/proxy/currencies?code=");
+const produst_post_api = getPath("/api/product")
 
 const currency_name = "USD";
 let upload_data = []
 let file = null;
 
-const is_edit = document.getElementById("id").innerHTML;
+const product_img = getPath("");
+const is_edit = getProductId();
 
 const img = document.getElementById("img");
 const name = document.getElementById("name");
@@ -16,10 +23,11 @@ console.log(is_edit);
 if (is_edit != -1) {
     console.log("Edit");
 
-    getJSON("/api/product?id="+ is_edit).then(function(input) {
+    getJSON(product_api + is_edit).then(function(input) {
         console.log(input);
 
         // Upload img
+        input.image = product_img + input.image;
         img.src = input.image;
         fetch(input.image)
         .then(res => res.blob())
@@ -35,7 +43,6 @@ if (is_edit != -1) {
         for (let i=0; i<input.urls.length; i++) {
             let url = input.urls[i];
             document.querySelector('input[alt="'+url.name+'"]').value = url.url;
-            // document.querySelector('input[alt="Citilink"]')
         }
         
     });
@@ -117,10 +124,10 @@ upload.onchange = function() {
 let check = document.getElementById("test");
 check.onclick = function() {
     let data = collect_data();
-    sendJSON("/proxy/shops", data).then(function(e) {
+    sendJSON(shop_api, data).then(function(e) {
         console.log(e);
         upload_data = e;
-        getJSON("/proxy/currencies?code="+currency_name).then(function(d) {
+        getJSON(currency_api+currency_name).then(function(d) {
             console.log(d);
             let table = document.getElementById("shops-table");
             table.innerHTML = "";
@@ -164,13 +171,13 @@ save.onclick = function() {
     formData.append("data", new Blob([JSON.stringify(json)], {'type': "application/json"}));
 
     console.log(formData, file);
-    sendForm("/api/product", formData).then(function(e) {
+    sendForm(produst_post_api, formData).then(function(e) {
         console.log(e);
 
         if (e.status == "error") {
             alert("Возникла ошибка при добавлении продукта.");
         } else {
-            window.location = '/';
+            window.location = getPath("");
         }
     });
 };

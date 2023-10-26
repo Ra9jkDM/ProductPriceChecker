@@ -2,23 +2,20 @@
 
 
 {% block js %}
-  <script defer type="module" src="{{ url_for('static', filename='js/modules/load_json.js') }}"></script>
+  <script defer type="module" src="{{ url_for('static', filename='js/modules/loadJson.js') }}"></script>
   <script defer type="module" src="{{ url_for('static', filename='js/modules/parseCookies.js') }}"></script>
   <script defer type="module" src="{{ url_for('static', filename='js/modules/currencyConverter.js') }}"></script>
 
   <script defer type="module" src="{{ url_for('static', filename='js/add_product.js') }}"></script> 
 {% endblock js %}
 
-{% block content %}
-    <div id="id" style="display: none;">{{ id }}</div>
-    <div class="info">
-    </div>
 
+{% block content %}
     <table>
       <tr>
         <td class="left-width">
           <div class="inline-container">
-            <img id="img" class="product-image" src="/img/no-photo.jpg"/>
+            <img id="img" class="product-image" src="{{ url_for('files.images', name='no-photo.jpg') }}"/>
             <label id="upload-label" class="button" for="upload">Загрузить изображение</label>
             <input id="upload" type="file" style="visibility:hidden;"/></div>
         </div>

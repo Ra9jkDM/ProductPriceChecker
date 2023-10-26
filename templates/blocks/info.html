@@ -1,8 +1,6 @@
-<div class="system-info" style="display: none;">
+<div id="system-info" style="display: none;">
     <div id="prefix">{{ PREFIX }}</div>
     <div id="user_id">{{ current_user.id }}</div>
     <div id="is_admin">{{ current_user|is_admin }}</div>
-
-    {% block info %}
-    {% endblock info %}
+    <div id="product_id">{{ product_id }}</div>
 </div>
