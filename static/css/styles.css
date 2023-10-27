@@ -357,6 +357,7 @@ table div textarea {
   margin-top: 10px;
 }
 .scroll-table table {
+  margin: 0 auto;
   width: 100%;
   max-width: 921px;
   table-layout: fixed;
@@ -385,6 +386,7 @@ table div textarea {
 }
 
 .scroll-table-body {
+  margin: 0 auto;
   height: 70vh;
   overflow-x: auto;
   width: 930px;

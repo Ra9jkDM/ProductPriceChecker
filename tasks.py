@@ -15,6 +15,7 @@ def update_currency_thread():
         sleep(CURRENCY_INTERVAL)
 
 def update_product_price_thread():
+    sleep(INIT_API_TIME)
     while True:
         update_prices()
         sleep(PRODUCT_INTERVAL)
@@ -22,7 +23,6 @@ def update_product_price_thread():
 
 
 def update_currency():
-    sleep(INIT_API_TIME)
     print("Update currencies")
     items = currency.get_currencies()
     print(items)

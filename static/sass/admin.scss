@@ -41,6 +41,7 @@ $column-amount: 8;
     margin-top: 10px;
 
     table {
+        margin: 0 auto;
         width:100%;
         max-width: calc($column-width * $column-amount + 1px);
         table-layout: fixed;
@@ -85,6 +86,7 @@ $column-amount: 8;
 
 
 .scroll-table-body {
+    margin: 0 auto;
 	height: 70vh;
 	overflow-x: auto;
     width: calc($column-width * $column-amount  + 10px);

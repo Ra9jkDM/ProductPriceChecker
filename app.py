@@ -35,8 +35,7 @@ def create_app():
     register_login_manager(app)
     urls.register_blueprints(app)
 
-    # ToDo uncomment this ->
-    # create_scheduled_tasks()
+    create_scheduled_tasks()
 
     return app
 
