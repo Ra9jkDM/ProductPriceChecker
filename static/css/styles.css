@@ -15,6 +15,7 @@
   margin: 5px;
 }
 .product .image {
+  object-fit: contain;
   height: 180px;
   min-height: 180px;
   width: auto;
@@ -112,6 +113,7 @@
 .product-image {
   border: 2px solid black;
   border-radius: 10px;
+  object-fit: contain;
   width: 300px;
   height: 300px;
 }

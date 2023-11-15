@@ -17,6 +17,8 @@ $name-height: 36px;
     margin: 5px;
 
     .image {
+        object-fit: contain;
+
         height: $image-size;
         min-height: $image-size;
         width: auto;

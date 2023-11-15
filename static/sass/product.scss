@@ -48,6 +48,8 @@ $footer-padding: 100px;
 }
 .product-image {
     @include border;
+
+    object-fit: contain;
     
     width: $image-size;
     height: $image-size;
