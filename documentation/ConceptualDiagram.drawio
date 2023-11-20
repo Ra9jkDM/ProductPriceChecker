@@ -1,0 +1,78 @@
+<mxfile host="app.diagrams.net" modified="2023-11-20T06:34:01.210Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/119.0" etag="MuEUSaWSINe9jxon94I_" version="22.1.3" type="device">
+  <diagram name="Страница — 1" id="O-yZdcrUGqeNOl5cW8k0">
+    <mxGraphModel dx="1816" dy="517" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="jmAP_dHZ4RGvJcV5f9Td-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="jmAP_dHZ4RGvJcV5f9Td-1" target="jmAP_dHZ4RGvJcV5f9Td-3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jmAP_dHZ4RGvJcV5f9Td-1" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Права доступа&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="60" y="70" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="jmAP_dHZ4RGvJcV5f9Td-3" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Профиль пользователя&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="320" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="jmAP_dHZ4RGvJcV5f9Td-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="jmAP_dHZ4RGvJcV5f9Td-5" target="jmAP_dHZ4RGvJcV5f9Td-3" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="65" y="145" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jmAP_dHZ4RGvJcV5f9Td-5" value="&lt;font size=&quot;3&quot;&gt;Добавление товара&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-20" y="420" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="jmAP_dHZ4RGvJcV5f9Td-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="jmAP_dHZ4RGvJcV5f9Td-6" target="jmAP_dHZ4RGvJcV5f9Td-11" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VSNYJmWtZTcg-S0YB2Ad-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="jmAP_dHZ4RGvJcV5f9Td-6" target="jmAP_dHZ4RGvJcV5f9Td-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jmAP_dHZ4RGvJcV5f9Td-6" value="&lt;font size=&quot;3&quot;&gt;Администрирование&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="244" y="280" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="jmAP_dHZ4RGvJcV5f9Td-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="jmAP_dHZ4RGvJcV5f9Td-9" target="jmAP_dHZ4RGvJcV5f9Td-10" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VSNYJmWtZTcg-S0YB2Ad-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="jmAP_dHZ4RGvJcV5f9Td-9" target="jmAP_dHZ4RGvJcV5f9Td-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="490" y="280" />
+              <mxPoint x="490" y="130" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jmAP_dHZ4RGvJcV5f9Td-9" value="&lt;font size=&quot;3&quot;&gt;Редактирование&amp;nbsp;товара&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="540" y="270" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="jmAP_dHZ4RGvJcV5f9Td-10" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Внесение изменений данных товара&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="572.5" y="90" width="165" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="jmAP_dHZ4RGvJcV5f9Td-11" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Внесение изменений в базу данных пользователей&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="460" y="350" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="jmAP_dHZ4RGvJcV5f9Td-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="jmAP_dHZ4RGvJcV5f9Td-17" target="jmAP_dHZ4RGvJcV5f9Td-6" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jmAP_dHZ4RGvJcV5f9Td-17" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Пользователь&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="80" y="270" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="jmAP_dHZ4RGvJcV5f9Td-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" parent="1" source="jmAP_dHZ4RGvJcV5f9Td-21" target="jmAP_dHZ4RGvJcV5f9Td-5" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="430" y="450" />
+              <mxPoint x="210" y="450" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jmAP_dHZ4RGvJcV5f9Td-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;" parent="1" source="jmAP_dHZ4RGvJcV5f9Td-21" target="jmAP_dHZ4RGvJcV5f9Td-9" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jmAP_dHZ4RGvJcV5f9Td-21" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Товар&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="430" y="430" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

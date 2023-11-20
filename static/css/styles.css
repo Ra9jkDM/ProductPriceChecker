@@ -325,8 +325,7 @@ table div textarea {
 .active {
   padding: 0 5px;
   font-size: 25px;
-  color: white !important;
-  background-color: black;
+  background-color: rgba(110, 187, 53, 0.54);
 }
 
 .tab, .tab-inner {

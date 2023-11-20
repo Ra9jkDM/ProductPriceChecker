@@ -34,6 +34,5 @@ $indent: 10px;
 .active {
     padding: 0 5px ;
     font-size: 25px;
-    color: white !important;
-    background-color: black;
+    background-color: $button-color;
 }
