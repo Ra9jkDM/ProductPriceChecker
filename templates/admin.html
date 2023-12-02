@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block js %}
+    <script defer type="module" src="{{ url_for('static', filename='js/modules/loadJson.js') }}"></script>
+    <script defer type="module" src="{{ url_for('static', filename='js/admin.js') }}"></script>
 {% endblock js %}
 
 {% block content %}
@@ -40,19 +42,8 @@
             </table>	
             <div class="scroll-table-body">
                 <table>
-                    <tbody>
-                        {% for i in range(60) %}
-                        <tr>
-                            <td>lib@gmail.com</td>
-                            <td>scrypt:32orgkwrg$lkgnbdk5olkfg</td>
-                            <td>Tom</td>
-                            <td>Robinson</td>
-                            <td>Пользователь</td>
-                            <td>Да</td>
-                            <td class="ignore"><a href="#"><div class="button save">Сохранить</div></a></td>
-                            <td class="ignore"><a href="#"><div class="button delete">Удалить</div></a></td>
-                        </tr>
-                        {% endfor %}
+                    <tbody id="users-list">
+                        
                     </tbody>
                 </table>
             </div>	

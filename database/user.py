@@ -43,3 +43,18 @@ def is_email_unique(email):
     return True
 
     
+def get_users():
+    users = []
+    roles = []
+    with Session(autoflush=True, bind=ENGINE) as db:
+        all = db.query(User).all()
+
+        for i in all:
+            users.append({"id": i.id, "email": i.email, "firstname": i.firstname, "lastname": i.lastname, "is_active": i.is_active, "role": i.role_id})
+        
+        role = db.query(Role).all()
+
+        for i in role:
+            roles.append({"id": i.id, "name": i.name})
+
+    return {"users": users, 'roles': roles}

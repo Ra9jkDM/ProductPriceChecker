@@ -4,7 +4,7 @@ import json
 
 from .modules.decorators import is_admin
 
-from database import product, comment, role
+from database import product, comment, role, user
 
 api = Blueprint("api", __name__)
 
@@ -75,3 +75,9 @@ def delete_comment():
 
     return {"status": "error"}
 
+
+@api.route("/users")
+@login_required
+@is_admin
+def get_users():
+    return user.get_users()

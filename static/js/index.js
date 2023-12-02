@@ -1,6 +1,6 @@
 import {sortProductPrices, sortProductsByASC, sortProductsByDESC, sortProductsByPriceASC, sortProductsByPriceDESC} from "./modules/sorts.js"
 import {getRubPrice, getDolPriceNumber, getDolPrice} from "./modules/currencyConverter.js";
-import {getJSON} from "./modules/loadJson.js"
+import { getJSON } from "./modules/loadJson.js"
 import { getPath } from "./modules/configLoader.js";
 
 const product_api = getPath("/api/products");
